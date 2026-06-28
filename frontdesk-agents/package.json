@@ -48,7 +48,8 @@
     "three": "^0.168.0",
     "twilio": "^6.0.2",
     "typescript": "^5.4.5",
-    "uuid": "^14.0.0"
+    "uuid": "^14.0.0",
+    "react-hot-toast": "^2.5.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.60.0",
