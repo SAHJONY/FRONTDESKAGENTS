@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Owner Dashboard — frontdeskagents.com</title>
+<meta name="theme-color" content="#0a0a0f">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="frontdesk">
+<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){})})}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;background:#0a0a0f;color:#e9e7ef}
+  input,button{font-family:inherit}
+  a{color:inherit}
+  @media(max-width:760px){
+    .dgrid{grid-template-columns:1fr!important}
+    .dgrid > aside{border-right:none!important;border-bottom:1px solid rgba(255,255,255,.07)}
+    .dgrid > main{padding:20px 16px!important}
+  }
+</style>
+</head>
+<body data-i18n-auto>
+
+<!-- ===== LOGIN GATE ===== -->
+<div id="loginGate" style="position:fixed;inset:0;z-index:1000;background:#0a0a0f;display:flex;align-items:center;justify-content:center;padding:24px">
+  <div style="width:100%;max-width:380px;background:#14141c;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:32px 28px;text-align:center">
+    <div style="width:46px;height:46px;border-radius:11px;background:#ff5c38;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 16px">⚡</div>
+    <div style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;margin-bottom:6px">Owner login</div>
+    <div style="font-size:13.5px;color:#8c8998;margin-bottom:22px">Enter your password to open the dashboard.</div>
+    <input id="loginPw" type="password" placeholder="Password" autocomplete="current-password" style="width:100%;background:#0a0a0f;border:1px solid rgba(255,255,255,.14);border-radius:11px;padding:13px 15px;color:#e9e7ef;font-size:15px;margin-bottom:12px">
+    <button id="loginBtn" style="width:100%;background:#ff5c38;color:#0a0a0f;border:none;cursor:pointer;font-weight:700;font-size:15px;padding:13px;border-radius:11px">Log in</button>
+    <div id="loginMsg" style="display:none;font-size:13px;color:#ff7a6e;margin-top:12px"></div>
+    <div style="font-size:12px;color:#5c5c66;margin-top:16px;line-height:1.5">Protected by your <b>ADMIN_PASSWORD</b>. Not set yet? You'll be let in with a reminder to add one.</div>
+  </div>
+</div>
+
+<div class="dgrid" style="display:grid;grid-template-columns:240px 1fr;min-height:100vh;display:none">
+  <aside style="background:#101017;border-right:1px solid rgba(255,255,255,.07);padding:22px 16px;display:flex;flex-direction:column;gap:6px">
+    <div style="display:flex;align-items:center;gap:10px;padding:6px 8px 20px"><div style="width:34px;height:34px;border-radius:9px;background:#ff5c38;display:flex;align-items:center;justify-content:center;font-size:18px">⚡</div><div><div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;line-height:1">frontdeskagents</div><div style="font-size:11px;color:#8c8998">DASHBOARD</div></div></div>
+    <button class="tab" data-tab="leads" style="text-align:left;border:none;cursor:pointer;font-size:14.5px;font-weight:600;padding:11px 13px;border-radius:10px;background:rgba(255,92,56,.14);color:#ff8366">🎯 Leads</button>
+    <button class="tab" data-tab="clients" style="text-align:left;border:none;cursor:pointer;font-size:14.5px;font-weight:600;padding:11px 13px;border-radius:10px;background:transparent;color:#b6b2c2">👥 Clients</button>
+    <button class="tab" data-tab="inbox" style="text-align:left;border:none;cursor:pointer;font-size:14.5px;font-weight:600;padding:11px 13px;border-radius:10px;background:transparent;color:#b6b2c2">📨 Inbox</button>
+    <button class="tab" data-tab="subs" style="text-align:left;border:none;cursor:pointer;font-size:14.5px;font-weight:600;padding:11px 13px;border-radius:10px;background:transparent;color:#b6b2c2">💳 Subscriptions</button>
+    <button class="tab" data-tab="sites" style="text-align:left;border:none;cursor:pointer;font-size:14.5px;font-weight:600;padding:11px 13px;border-radius:10px;background:transparent;color:#b6b2c2">🌐 Sites</button>
+    <button class="tab" data-tab="customers" style="text-align:left;border:none;cursor:pointer;font-size:14.5px;font-weight:600;padding:11px 13px;border-radius:10px;background:transparent;color:#b6b2c2">🚗 Customers</button>
+    <button class="tab" data-tab="statereq" style="text-align:left;border:none;cursor:pointer;font-size:14.5px;font-weight:600;padding:11px 13px;border-radius:10px;background:transparent;color:#b6b2c2">📋 State Rules</button>
+    <button class="tab" data-tab="playbook" style="text-align:left;border:none;cursor:pointer;font-size:14.5px;font-weight:600;padding:11px 13px;border-radius:10px;background:transparent;color:#b6b2c2">📖 Playbook</button>
+    <button class="tab" data-tab="scripts" style="text-align:left;border:none;cursor:pointer;font-size:14.5px;font-weight:600;padding:11px 13px;border-radius:10px;background:transparent;color:#b6b2c2">💬 Scripts</button>
+    <button class="tab" data-tab="settings" style="text-align:left;border:none;cursor:pointer;font-size:14.5px;font-weight:600;padding:11px 13px;border-radius:10px;background:transparent;color:#b6b2c2">⚙️ Settings</button>
+    <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px">
+      <div style="display:flex;flex-direction:column;gap:2px;padding:8px 0 10px;border-top:1px solid rgba(255,255,255,.07)">
+        <a href="/" style="text-decoration:none;color:#8c8998;font-size:13px;font-weight:600;padding:6px 8px;border-radius:8px">🏠 Home</a>
+        <a href="/pricing.html" style="text-decoration:none;color:#8c8998;font-size:13px;font-weight:600;padding:6px 8px;border-radius:8px">💸 Pricing</a>
+        <a href="/contact.html" style="text-decoration:none;color:#8c8998;font-size:13px;font-weight:600;padding:6px 8px;border-radius:8px">✉️ Contact</a>
+      </div>
+      <a href="/builder.html" style="text-decoration:none;background:#ff5c38;color:#0a0a0f;font-weight:700;font-size:14px;padding:12px 13px;border-radius:10px;text-align:center">⚡ New build</a>
+      <select data-lang-select data-no-i18n aria-label="Language" style="background:rgba(255,255,255,.06);color:#b6b2c2;border:1px solid rgba(255,255,255,.12);font-size:12.5px;font-weight:600;padding:8px;border-radius:9px;cursor:pointer"></select>
+      <button id="logoutBtn" style="background:transparent;color:#8c8998;border:1px solid rgba(255,255,255,.12);cursor:pointer;font-size:12.5px;font-weight:600;padding:8px;border-radius:9px">🔒 Log out</button>
+      <div id="cloudDot" style="font-size:12px;color:#8c8998;text-align:center">Cloud: checking…</div>
+    </div>
+  </aside>
+
+  <main style="padding:28px 32px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:22px">
+      <div><div id="pTitle" style="font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:700">Leads</div><div id="pSub" style="font-size:13px;color:#8c8998">New business in your pipeline</div></div>
+      <div style="display:flex;gap:8px">
+        <button id="findBtn" style="display:none;background:rgba(47,212,127,.16);color:#2fd47f;border:none;cursor:pointer;font-size:14px;font-weight:700;padding:11px 16px;border-radius:10px">📍 Find leads</button>
+        <button id="addBtn" style="background:#ff5c38;color:#0a0a0f;border:none;cursor:pointer;font-size:14px;font-weight:700;padding:11px 18px;border-radius:10px">＋ Add</button>
+      </div>
+    </div>
+    <div id="list" data-no-i18n style="display:flex;flex-direction:column;gap:10px"></div>
+  </main>
+</div>
+
+<script>
+const KEY = "fda:panel:owner";
+let state = { leads:[], clients:[], subs:[] };
+let tab = "leads";
+
+async function load(){
+  try{
+    const r = await fetch("/api/data?key="+encodeURIComponent(KEY), { headers: authHeaders() });
+    const j = await r.json();
+    if(j.value){ state = Object.assign({leads:[],clients:[],subs:[]}, j.value); }
+    document.getElementById("cloudDot").textContent = "Cloud: connected ✓";
+    document.getElementById("cloudDot").style.color = "#2fd47f";
+  }catch(e){
+    document.getElementById("cloudDot").textContent = "Cloud: offline (set env vars)";
+  }
+  if(!state.subs) state.subs = [];
+  if(!state.leads.length && !state.clients.length){
+    state.leads = [
+      {id:1,name:"Maria's Bakery",type:"Bakery",city:"Katy, TX",value:"$1,299 build"},
+      {id:2,name:"Sunset Nails",type:"Nail Salon",city:"Sugar Land",value:"$899 build"},
+    ];
+  }
+  render();
+}
+
+function authHeaders(extra){
+  const h = Object.assign({}, extra||{});
+  const t = sessionStorage.getItem("fda_admin");
+  if(t) h["x-admin-token"] = t;
+  return h;
+}
+
+async function save(){
+  try{
+    await fetch("/api/data?key="+encodeURIComponent(KEY),{method:"POST",headers:authHeaders({"content-type":"application/json"}),body:JSON.stringify(state)});
+    document.getElementById("cloudDot").textContent = "Cloud: saved ✓";
+    document.getElementById("cloudDot").style.color = "#2fd47f";
+  }catch(e){ document.getElementById("cloudDot").textContent = "Cloud: save failed"; }
+}
+
+const TITLES = { leads:["Leads","New business in your pipeline"], clients:["Clients","Businesses you've built sites for"], inbox:["Inbox","Free-mockup requests from your site"], subs:["Subscriptions","Recurring care-plan revenue"], sites:["Sites","Published client websites"], customers:["Customers","Vehicles, financing, payments & portal access"], statereq:["State Rules","Auto-finance & refinance requirements by state — review & edit"], playbook:["Playbook","Your A→Z strategy (owner-only)"], scripts:["Scripts","Your sales scripts (owner-only — keep private)"], settings:["Settings","Manage AI engine keys (env secrets)"] };
+
+function render(){
+  const [t,s] = TITLES[tab] || TITLES.leads;
+  document.getElementById("pTitle").textContent = t;
+  document.getElementById("pSub").textContent = s;
+  document.getElementById("addBtn").style.display = (tab==="settings"||tab==="statereq") ? "none" : "block";
+  document.getElementById("addBtn").textContent = tab==="subs" ? "＋ Add subscription" : (tab==="customers" ? "＋ Add customer" : "＋ Add");
+  document.getElementById("findBtn").style.display = tab==="leads" ? "block" : "none";
+  if(tab==="settings"){ renderSettings(); return; }
+  if(tab==="inbox"){ renderInbox(); return; }
+  if(tab==="subs"){ renderSubs(); return; }
+  if(tab==="sites"){ renderSites(); return; }
+  if(tab==="customers"){ renderCustomers(); return; }
+  if(tab==="statereq"){ renderStateReq(); return; }
+  if(tab==="playbook"){ renderPlaybook(); return; }
+  if(tab==="scripts"){ renderScripts(); return; }
+  const items = state[tab]||[];
+  const list = document.getElementById("list");
+  if(!items.length){ list.innerHTML = `<div style="color:#8c8998;font-size:14px;padding:20px">No ${tab} yet. Click “Add”.</div>`; return; }
+  list.innerHTML = items.map((it,i)=>`
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;background:#14141c;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px 20px">
+      <div><div style="font-weight:700;font-size:15px">${it.name||""}</div><div style="font-size:12.5px;color:#8c8998">${(it.type||"")}${it.city?(" · "+it.city):""}${it.value?(" · "+it.value):""}</div></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
+        <button data-i="${i}" class="reach" style="background:rgba(123,162,255,.14);color:#7aa2ff;border:none;cursor:pointer;font-size:12.5px;font-weight:700;padding:7px 13px;border-radius:8px">✉️ Reach</button>
+        ${tab==="leads"?`<button data-i="${i}" class="win" style="background:rgba(21,194,107,.14);color:#2fd47f;border:none;cursor:pointer;font-size:12.5px;font-weight:700;padding:7px 13px;border-radius:8px">Won →</button>`:""}
+        <button data-i="${i}" class="del" style="background:rgba(255,90,77,.14);color:#ff7a6e;border:none;cursor:pointer;font-size:12.5px;font-weight:700;padding:7px 13px;border-radius:8px">Delete</button>
+      </div>
+    </div>`).join("");
+  list.querySelectorAll(".del").forEach(b=>b.onclick=()=>{ const i=+b.dataset.i; state[tab].splice(i,1); save(); render(); });
+  list.querySelectorAll(".reach").forEach(b=>b.onclick=()=>reach(+b.dataset.i));
+  list.querySelectorAll(".win").forEach(b=>b.onclick=()=>{
+    const i=+b.dataset.i; const lead=state.leads.splice(i,1)[0];
+    state.clients.push({...lead, value:"Live · $89/mo"});
+    // Auto-start a care-plan subscription for the new client.
+    state.subs.push({ id:Date.now(), name:lead.name, plan:"Care plan", price:89, status:"active", since:new Date().toISOString().slice(0,10) });
+    save(); render();
+  });
+}
+
+/* ===================== SUBSCRIPTIONS ===================== */
+function money(n){ return "$"+(Number(n)||0).toLocaleString(); }
+function renderSubs(){
+  const list = document.getElementById("list");
+  const subs = state.subs||[];
+  const active = subs.filter(s=>s.status==="active");
+  const mrr = active.reduce((t,s)=>t+(Number(s.price)||0),0);
+  const paused = subs.filter(s=>s.status==="paused").length;
+  const canceled = subs.filter(s=>s.status==="canceled").length;
+
+  const summary = `
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px">
+      <div style="background:linear-gradient(160deg,#1f1626,#14141c);border:1px solid rgba(255,92,56,.3);border-radius:12px;padding:16px"><div style="font-size:12px;color:#8c8998">Monthly recurring (MRR)</div><div style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:#ff8366">${money(mrr)}</div></div>
+      <div style="background:#14141c;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px"><div style="font-size:12px;color:#8c8998">Yearly (ARR)</div><div style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700">${money(mrr*12)}</div></div>
+      <div style="background:#14141c;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px"><div style="font-size:12px;color:#8c8998">Active</div><div style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:#2fd47f">${active.length}</div></div>
+      <div style="background:#14141c;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px"><div style="font-size:12px;color:#8c8998">Paused · Canceled</div><div style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700">${paused} · ${canceled}</div></div>
+    </div>`;
+
+  if(!subs.length){ list.innerHTML = summary + `<div style="color:#8c8998;font-size:14px;padding:20px">No subscriptions yet. Mark a lead “Won” or click “Add subscription”.</div>`; return; }
+
+  const statusColor = {active:["#2fd47f","rgba(21,194,107,.14)"], paused:["#e8b13a","rgba(232,177,58,.14)"], canceled:["#ff7a6e","rgba(255,90,77,.14)"]};
+  const rows = subs.map((s,i)=>{
+    const [c,bg]=statusColor[s.status]||statusColor.active;
+    const toggle = s.status==="active"
+      ? `<button data-i="${i}" class="sPause" style="background:rgba(232,177,58,.14);color:#e8b13a;border:none;cursor:pointer;font-size:12px;font-weight:700;padding:7px 12px;border-radius:8px">Pause</button>`
+      : s.status==="paused"
+      ? `<button data-i="${i}" class="sResume" style="background:rgba(21,194,107,.14);color:#2fd47f;border:none;cursor:pointer;font-size:12px;font-weight:700;padding:7px 12px;border-radius:8px">Resume</button>`
+      : `<button data-i="${i}" class="sResume" style="background:rgba(21,194,107,.14);color:#2fd47f;border:none;cursor:pointer;font-size:12px;font-weight:700;padding:7px 12px;border-radius:8px">Reactivate</button>`;
+    const cancelBtn = s.status!=="canceled" ? `<button data-i="${i}" class="sCancel" style="background:rgba(255,90,77,.1);color:#ff7a6e;border:none;cursor:pointer;font-size:12px;font-weight:700;padding:7px 12px;border-radius:8px">Cancel</button>` : "";
+    return `<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;background:#14141c;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:15px 18px">
+      <div><div style="font-weight:700;font-size:15px">${s.name||""} <span style="display:inline-block;font-size:11px;font-weight:700;color:${c};background:${bg};padding:2px 9px;border-radius:999px;margin-left:6px;text-transform:capitalize">${s.status}</span></div>
+      <div style="font-size:12.5px;color:#8c8998;margin-top:3px">${money(s.price)}/mo · ${s.plan||"Care plan"}${s.since?(" · since "+s.since):""}</div></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end"><button data-i="${i}" class="sLink" style="background:rgba(123,162,255,.14);color:#7aa2ff;border:none;cursor:pointer;font-size:12px;font-weight:700;padding:7px 12px;border-radius:8px">💳 Link</button>${toggle}${cancelBtn}<button data-i="${i}" class="sDel" style="background:rgba(255,255,255,.06);color:#8c8998;border:none;cursor:pointer;font-size:12px;font-weight:700;padding:7px 12px;border-radius:8px">Delete</button></div>
+    </div>`;
+  }).join("");
+
+  const toolbar = `<div style="display:flex;justify-content:flex-end;margin-bottom:12px"><button id="payLinkBtn" style="background:rgba(255,92,56,.16);color:#ff8366;border:none;cursor:pointer;font-size:13px;font-weight:700;padding:9px 15px;border-radius:9px">💳 Create payment link</button></div>`;
+  list.innerHTML = summary + toolbar + rows;
+  document.getElementById("payLinkBtn").onclick = ()=>{
+    const name=prompt("Client / business name?"); if(!name) return;
+    const build=parseFloat(prompt("One-time build price? (USD, 0 to skip)","1299"))||0;
+    const monthly=parseFloat(prompt("Monthly care plan? (USD, 0 to skip)","89"))||0;
+    const installments=Math.max(1,Math.round(parseFloat(prompt("Can't pay in full? Split the build into how many monthly payments?\n(1 = pay in full)","1"))||1));
+    let down=0;
+    if(installments>1 && build>0){ down=Math.max(0,parseFloat(prompt("Down payment due today? (USD — leave blank to use your minimum policy)","")||0)||0); }
+    const slug=(prompt("Link to a published site? Enter its slug to auto-publish on payment & pull it on missed payment (leave blank to skip):","")||"").trim();
+    paymentLink(name, build, monthly, installments, down, slug);
+  };
+  list.querySelectorAll(".sLink").forEach(b=>b.onclick=()=>{ const s=state.subs[+b.dataset.i]; paymentLink(s.name, 0, Number(s.price)||0, 1); });
+  list.querySelectorAll(".sPause").forEach(b=>b.onclick=()=>{ state.subs[+b.dataset.i].status="paused"; save(); render(); });
+  list.querySelectorAll(".sResume").forEach(b=>b.onclick=()=>{ state.subs[+b.dataset.i].status="active"; save(); render(); });
+  list.querySelectorAll(".sCancel").forEach(b=>b.onclick=()=>{ if(confirm("Cancel this subscription?")){ state.subs[+b.dataset.i].status="canceled"; save(); render(); } });
+  list.querySelectorAll(".sDel").forEach(b=>b.onclick=()=>{ if(confirm("Delete this subscription record?")){ state.subs.splice(+b.dataset.i,1); save(); render(); } });
+}
+
+async function paymentLink(name, build, monthly, installments, downPayment, slug){
+  try{
+    const r = await fetch("/api/checkout",{method:"POST",headers:authHeaders({"content-type":"application/json"}),body:JSON.stringify({name,build,monthly,installments:installments||1,downPayment:downPayment||0,slug:slug||""})});
+    const j = await r.json();
+    if(!r.ok){ alert(j.error||"Could not create payment options."); return; }
+    // The server returns a ready-to-send message listing every option:
+    // card / Cash App / installments (Stripe), Square, and manual Zelle + Cash App.
+    const msg = j.message || j.url || "";
+    try{ await navigator.clipboard.writeText(msg); }catch(_){}
+    if(j.url) window.open(j.url,"_blank");
+    alert("✓ Payment options copied — paste into a text or email to "+name+":\n\n"+msg);
+  }catch(e){ alert("Network error creating payment options."); }
+}
+
+/* ===================== LEAD FINDER + OUTREACH ===================== */
+function findLeads(){
+  const kw = prompt("Business type to find? (e.g. barber, bakery, auto repair)\nLeave blank for all.","")||"";
+  const list = document.getElementById("list");
+  const run = async (payload)=>{
+    list.innerHTML = `<div style="color:#8c8998;padding:20px">🔎 Searching businesses…</div>`;
+    try{
+      const r = await fetch("/api/leads-find",{method:"POST",headers:authHeaders({"content-type":"application/json"}),body:JSON.stringify({keyword:kw,...payload})});
+      const j = await r.json();
+      if(!r.ok){ list.innerHTML = `<div style="color:#ff7a6e;padding:20px">${j.error||"Search failed."}</div>`; return; }
+      renderFound(j.leads||[]);
+    }catch(e){ list.innerHTML = `<div style="color:#ff7a6e;padding:20px">Network error.</div>`; }
+  };
+  // Fallback when location is denied/unsupported: let them type a city/area.
+  const askLocation = ()=>{
+    const loc = (prompt("Couldn't use your location. Enter a city or area to search:\n(e.g. \"Houston, TX\" or a ZIP code)","")||"").trim();
+    if(!loc){ list.innerHTML = `<div style="color:#8c8998;padding:20px">No location given. Click “📍 Find leads” to try again.</div>`; return; }
+    run({locationText:loc});
+  };
+  if(!navigator.geolocation){ askLocation(); return; }
+  list.innerHTML = `<div style="color:#8c8998;padding:20px">📍 Getting your location…</div>`;
+  navigator.geolocation.getCurrentPosition(
+    (pos)=> run({lat:pos.coords.latitude,lng:pos.coords.longitude}),
+    ()=> askLocation(),               // blocked/denied -> manual city entry
+    {timeout:10000, enableHighAccuracy:false}
+  );
+}
+function renderFound(leads){
+  const list = document.getElementById("list");
+  if(!leads.length){ list.innerHTML = `<div style="color:#8c8998;padding:20px">No businesses found. Try a different keyword. <button id="backLeads" style="background:transparent;border:1px solid rgba(255,255,255,.14);color:#b6b2c2;cursor:pointer;font-size:12px;padding:5px 10px;border-radius:8px">← Back</button></div>`; document.getElementById("backLeads").onclick=render; return; }
+  const esc=(s)=>String(s||"").replace(/[<>"&]/g,c=>({"<":"&lt;",">":"&gt;",'"':"&quot;","&":"&amp;"}[c]));
+  list.innerHTML = `<div style="margin-bottom:10px;color:#8c8998;font-size:13px">Found ${leads.length} · 🟢 = no website (best prospects) <button id="backLeads" style="background:transparent;border:1px solid rgba(255,255,255,.14);color:#b6b2c2;cursor:pointer;font-size:12px;padding:5px 10px;border-radius:8px;margin-left:8px">← Back</button></div>`
+    + leads.map((l,i)=>{
+        const contact=[];
+        if(l.phone) contact.push(`📞 <a href="tel:${esc(l.phone)}" style="color:#b6b2c2;text-decoration:none">${esc(l.phone)}</a>`);
+        if(l.email) contact.push(`✉️ <a href="mailto:${esc(l.email)}" style="color:#b6b2c2;text-decoration:none">${esc(l.email)}</a>`);
+        if(l.website) contact.push(`🌐 <a href="${esc(l.website)}" target="_blank" rel="noopener" style="color:#b6b2c2;text-decoration:none">website</a>`);
+        if(l.mapsUrl) contact.push(`📍 <a href="${esc(l.mapsUrl)}" target="_blank" rel="noopener" style="color:#b6b2c2;text-decoration:none">map</a>`);
+        const meta=[l.address, l.rating?`★ ${l.rating} (${l.reviews||0})`:"", l.needsSite?"NO SITE":""].filter(Boolean).join(" · ");
+        return `<div style="background:#14141c;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:14px 16px;margin-bottom:8px">
+          <div style="display:flex;align-items:start;justify-content:space-between;gap:12px">
+            <div style="min-width:0;flex:1"><div style="font-weight:700;font-size:14.5px">${l.needsSite?"🟢 ":"⚪ "}${esc(l.name)}</div>
+            <div style="font-size:12px;color:#8c8998;margin-top:3px">${esc(meta)}</div>
+            <div style="font-size:12.5px;color:#b6b2c2;margin-top:6px;display:flex;flex-wrap:wrap;gap:12px">${contact.join("")||'<span style="color:#6b6877">no public contact info</span>'}</div></div>
+            <button data-i="${i}" class="addFound" style="background:rgba(255,92,56,.16);color:#ff8366;border:none;cursor:pointer;font-size:12px;font-weight:700;padding:7px 12px;border-radius:8px;white-space:nowrap">+ Add</button>
+          </div></div>`;
+      }).join("");
+  document.getElementById("backLeads").onclick = render;
+  list.querySelectorAll(".addFound").forEach(b=>b.onclick=()=>{ const l=leads[+b.dataset.i]; state.leads.push({id:Date.now(),name:l.name,type:"",city:l.address||"",phone:l.phone||"",email:l.email||"",website:l.website||"",value:l.needsSite?"No website — hot 🔥":"Has site"}); save(); b.textContent="Added ✓"; b.disabled=true; });
+}
+async function sendOutreach(name, phone, email){
+  const ch = (prompt("Send via — type 'sms' or 'email':","sms")||"").toLowerCase().startsWith("e") ? "email" : "sms";
+  const to = prompt(ch==="email"?"Recipient email:":"Recipient phone (+1…):", (ch==="email"?(email||phone):(phone||email))||"")||""; if(!to) return;
+  const msg = prompt("Message:", `Hi! I'm local and I build websites for businesses like ${name}. I put together a free sample for you — want me to send it over? No cost, no commitment.`)||""; if(!msg) return;
+  try{
+    const r = await fetch("/api/outreach",{method:"POST",headers:authHeaders({"content-type":"application/json"}),body:JSON.stringify({channel:ch,to,message:msg})});
+    const j = await r.json();
+    if(!r.ok){ alert(j.error||"Send failed."); return; }
+    alert("✓ Sent to "+to);
+  }catch(e){ alert("Network error."); }
+}
+function reach(i){ const it = state[tab][i]; if(it) sendOutreach(it.name, it.phone||"", it.email||""); }
+
+/* ===================== INBOX (free-mockup requests) ===================== */
+const INBOX_KEY = "fda:contact:inbox";
+let inboxCache = [];
+async function renderInbox(){
+  document.getElementById("addBtn").style.display = "none";
+  const list = document.getElementById("list");
+  list.innerHTML = `<div style="color:#8c8998;font-size:14px;padding:20px">Loading…</div>`;
+  try{
+    const r = await fetch("/api/data?key="+encodeURIComponent(INBOX_KEY), { headers: authHeaders() });
+    const j = await r.json();
+    if(!r.ok){ list.innerHTML = `<div style="color:#ff7a6e;padding:20px">${j.error||"Could not load inbox."}</div>`; return; }
+    inboxCache = Array.isArray(j.value) ? j.value.slice().reverse() : []; // newest first
+  }catch(e){ list.innerHTML = `<div style="color:#ff7a6e;padding:20px">Network error.</div>`; return; }
+
+  if(!inboxCache.length){ list.innerHTML = `<div style="color:#8c8998;font-size:14px;padding:20px">No requests yet. They arrive here when someone submits the <a href="/contact.html" style="color:#ff8366">contact form</a>.</div>`; return; }
+  list.innerHTML = inboxCache.map((m,i)=>`
+    <div style="background:#14141c;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px 18px;margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
+        <div style="min-width:0"><div style="font-weight:700;font-size:15px">${m.name||"(no name)"} <span style="color:#8c8998;font-weight:500;font-size:13px">· ${m.type||""}</span></div>
+        <div style="font-size:13px;color:#b6b2c2;margin-top:3px">${m.contact||""}${m.city?(" · "+m.city):""}</div>
+        ${m.url?`<div style="font-size:12.5px;color:#8c8998;margin-top:2px">site: ${m.url}</div>`:""}
+        ${m.notes?`<div style="font-size:13px;color:#cbc8d4;margin-top:6px">“${m.notes}”</div>`:""}
+        <div style="font-size:11.5px;color:#5c5c66;margin-top:6px">${(m.at||"").slice(0,16).replace("T"," ")}</div></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-start">
+          <button data-i="${i}" class="ibLead" style="background:rgba(255,92,56,.16);color:#ff8366;border:none;cursor:pointer;font-size:12px;font-weight:700;padding:7px 12px;border-radius:8px">+ Lead</button>
+          <button data-i="${i}" class="ibReach" style="background:rgba(123,162,255,.14);color:#7aa2ff;border:none;cursor:pointer;font-size:12px;font-weight:700;padding:7px 12px;border-radius:8px">✉️ Reach</button>
+          <button data-i="${i}" class="ibDel" style="background:rgba(255,90,77,.14);color:#ff7a6e;border:none;cursor:pointer;font-size:12px;font-weight:700;padding:7px 12px;border-radius:8px">Delete</button>
+        </div>
+      </div>
+    </div>`).join("");
+  list.querySelectorAll(".ibLead").forEach(b=>b.onclick=()=>{ const m=inboxCache[+b.dataset.i]; state.leads.push({id:Date.now(),name:m.name,type:m.type||"",city:m.city||"",phone:m.contact||"",value:"Mockup request 🔥"}); save(); b.textContent="Added ✓"; b.disabled=true; });
+  list.querySelectorAll(".ibReach").forEach(b=>b.onclick=()=>{ const m=inboxCache[+b.dataset.i]; sendOutreach(m.name, m.contact||""); });
+  list.querySelectorAll(".ibDel").forEach(b=>b.onclick=()=>deleteInbox(+b.dataset.i));
+}
+async function deleteInbox(i){
+  if(!confirm("Delete this request?")) return;
+  const target = inboxCache[i];
+  // inboxCache is reversed; rebuild the original-order array without this entry (match by id).
+  const remaining = inboxCache.filter(x=>x!==target).slice().reverse();
+  try{
+    const r = await fetch("/api/data?key="+encodeURIComponent(INBOX_KEY),{method:"POST",headers:authHeaders({"content-type":"application/json"}),body:JSON.stringify(remaining)});
+    if(!r.ok){ const j=await r.json(); alert(j.error||"Delete failed"); return; }
+    renderInbox();
+  }catch(e){ alert("Network error."); }
+}
+
+/* ===================== SITES (published) ===================== */
+async function renderSites(){
+  document.getElementById("addBtn").style.display = "none";
+  const list = document.getElementById("list");
+  list.innerHTML = `<div style="color:#8c8998;font-size:14px;padding:20px">Loading…</div>`;
+  let data;
+  try{
+    const r = await fetch("/api/sites", { headers: authHeaders() });
+    data = await r.json();
+    if(!r.ok){ list.innerHTML = `<div style="color:#ff7a6e;font-size:14px;padding:20px">${data.error||"Could not load sites."}</div>`; return; }
+  }catch(e){ list.innerHTML = `<div style="color:#ff7a6e;font-size:14px;padding:20px">Network error.</div>`; return; }
+
+  const sites = data.sites || [];
+  if(!sites.length){ list.innerHTML = `<div style="color:#8c8998;font-size:14px;padding:20px">No published sites yet. Build one in the <a href="/builder.html" style="color:#ff8366">builder</a>, then hit <b>🚀 Save &amp; Publish</b>.</div>`; return; }
+
+  list.innerHTML = sites.map(s=>{
+    const link = "/s/"+s.slug;
+    const when = (s.at||"").slice(0,10);
+    const live = (s.status||"active")==="active";
+    const badge = live
+      ? `<span style="font-size:11px;font-weight:700;color:#2fd47f;background:rgba(21,194,107,.12);padding:2px 8px;border-radius:6px;margin-left:4px">● LIVE</span>`
+      : `<span style="font-size:11px;font-weight:700;color:#ffb547;background:rgba(255,181,71,.12);padding:2px 8px;border-radius:6px;margin-left:4px">🔒 PAUSED</span>`;
+    const toggle = live
+      ? `<button data-slug="${s.slug}" data-to="suspended" class="siteStatus" style="background:rgba(255,181,71,.14);color:#ffb547;border:none;cursor:pointer;font-size:12px;font-weight:700;padding:7px 12px;border-radius:8px">Pause</button>`
+      : `<button data-slug="${s.slug}" data-to="active" class="siteStatus" style="background:rgba(21,194,107,.14);color:#2fd47f;border:none;cursor:pointer;font-size:12px;font-weight:700;padding:7px 12px;border-radius:8px">Go live</button>`;
+    return `<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;background:#14141c;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:15px 18px">
+      <div style="min-width:0"><div style="font-weight:700;font-size:15px">${s.name||s.slug} ${badge} <span style="font-size:12px;font-weight:600;color:#2fd47f;margin-left:4px">👁 ${(s.views||0).toLocaleString()}</span></div><div style="font-size:12.5px;color:#8c8998;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${location.host}${link}${when?(" · "+when):""}</div></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
+        <a href="${link}" target="_blank" rel="noopener" style="text-decoration:none;background:rgba(21,194,107,.14);color:#2fd47f;font-size:12px;font-weight:700;padding:7px 12px;border-radius:8px">Open</a>
+        <button data-slug="${s.slug}" class="siteCopy" style="background:rgba(123,162,255,.14);color:#7aa2ff;border:none;cursor:pointer;font-size:12px;font-weight:700;padding:7px 12px;border-radius:8px">Copy link</button>
+        ${toggle}
+        <button data-slug="${s.slug}" class="siteDel" style="background:rgba(255,90,77,.14);color:#ff7a6e;border:none;cursor:pointer;font-size:12px;font-weight:700;padding:7px 12px;border-radius:8px">Delete</button>
+      </div>
+    </div>`;
+  }).join("");
+
+  list.querySelectorAll(".siteStatus").forEach(b=>b.onclick=async()=>{
+    const to=b.dataset.to;
+    if(to==="active" && !confirm("Take this site LIVE? (Do this once you've confirmed their Zelle/Cash App payment.)")) return;
+    if(to==="suspended" && !confirm("Pause this site? Visitors will see a 'paused pending payment' page.")) return;
+    b.disabled=true; b.textContent="…";
+    try{
+      const r=await fetch("/api/sites",{method:"POST",headers:authHeaders({"content-type":"application/json"}),body:JSON.stringify({action:"status",slug:b.dataset.slug,status:to})});
+      if(!r.ok){ const j=await r.json(); alert(j.error||"Couldn't update status"); b.disabled=false; return; }
+      renderSites();
+    }catch(e){ alert("Network error"); b.disabled=false; }
+  });
+  list.querySelectorAll(".siteCopy").forEach(b=>b.onclick=async()=>{ try{ await navigator.clipboard.writeText(location.origin+"/s/"+b.dataset.slug); b.textContent="Copied ✓"; setTimeout(()=>b.textContent="Copy link",1200);}catch(_){}});
+  list.querySelectorAll(".siteDel").forEach(b=>b.onclick=async()=>{
+    if(!confirm("Unpublish and delete this site?")) return;
+    try{
+      const r=await fetch("/api/sites",{method:"POST",headers:authHeaders({"content-type":"application/json"}),body:JSON.stringify({delete:true,slug:b.dataset.slug})});
+      if(!r.ok){ const j=await r.json(); alert(j.error||"Delete failed"); return; }
+      renderSites();
+    }catch(e){ alert("Network error"); }
+  });
+}
+
+/* ===================== PLAYBOOK (embedded) ===================== */
+function renderPlaybook(){
+  document.getElementById("addBtn").style.display = "none";
+  document.getElementById("list").innerHTML = `<iframe src="/playbook.html" style="width:100%;height:calc(100vh - 150px);border:1px solid rgba(255,255,255,.08);border-radius:12px;background:#0d0d12"></iframe>`;
+}
+
+/* ===================== SCRIPTS (embedded — owner-only secret sauce) ===================== */
+function renderScripts(){
+  document.getElementById("addBtn").style.display = "none";
+  document.getElementById("list").innerHTML = `<iframe src="/scripts.html" style="width:100%;height:calc(100vh - 150px);border:1px solid rgba(255,255,255,.08);border-radius:12px;background:#0d0d12"></iframe>`;
+}
+
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{
+  tab=t.dataset.tab;
+  document.querySelectorAll(".tab").forEach(x=>{x.style.background="transparent";x.style.color="#b6b2c2";});
+  t.style.background="rgba(255,92,56,.14)";t.style.color="#ff8366";
+  render();
+});
+
+document.getElementById("findBtn").onclick = findLeads;
+
+document.getElementById("addBtn").onclick=()=>{
+  if(tab==="customers"){ newCustomer(); return; }
+  if(tab==="subs"){
+    const name=prompt("Client / business name?"); if(!name) return;
+    const price=parseFloat(prompt("Monthly price? (USD)","89"))||89;
+    const plan=prompt("Plan name?","Care plan")||"Care plan";
+    state.subs.push({id:Date.now(),name,plan,price,status:"active",since:new Date().toISOString().slice(0,10)});
+    save(); render(); return;
+  }
+  const name=prompt("Business name?"); if(!name) return;
+  const type=prompt("Type? (e.g. Bakery)")||"";
+  const city=prompt("City?")||"";
+  state[tab].push({id:Date.now(),name,type,city,value: tab==="leads"?"$1,299 build":"Live · $89/mo"});
+  save(); render();
+};
+
+/* ===================== CUSTOMERS — vehicles, financing, payments ===================== */
+let custIndex = [];            // [{id,name,email,status,vehicle}]
+let curCust = null;            // full record being edited
+const CUST_INDEX_KEY = "fda:cust:index";
+function normEmail(e){ return String(e||"").trim().toLowerCase().replace(/[^a-z0-9]+/g,"_").slice(0,80); }
+function genCode(){ return Math.random().toString(36).slice(2,7).toUpperCase().replace(/[O0I1]/g,"X"); }
+function newId(){ return "c"+Date.now().toString(36)+Math.random().toString(36).slice(2,5); }
+function moneyD(n){ n=Number(n); return isFinite(n)?("$"+n.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2})):"—"; }
+function dealerName(){ return (state.clients&&state.clients[0]&&state.clients[0].name) || "Your Dealership"; }
+function portalURL(){ return location.origin + "/portal.html"; }
+
+async function kvGet(key){ const r=await fetch("/api/data?key="+encodeURIComponent(key),{headers:authHeaders()}); const j=await r.json(); return j.value; }
+async function kvSet(key,val){ const r=await fetch("/api/data?key="+encodeURIComponent(key),{method:"POST",headers:authHeaders({"content-type":"application/json"}),body:JSON.stringify(val)}); if(!r.ok) throw new Error("Save failed"); }
+
+async function loadCustIndex(){ try{ custIndex = (await kvGet(CUST_INDEX_KEY)) || []; }catch(e){ custIndex=[]; } if(!Array.isArray(custIndex)) custIndex=[]; }
+
+function balanceOf(c){
+  const ct=c.contract||{}, pays=Array.isArray(c.payments)?c.payments:[];
+  const paid=pays.reduce((s,p)=>s+(Number(p.amount)||0),0);
+  const monthly=Number(ct.monthlyPayment)||0, term=Number(ct.termMonths)||0;
+  const total = monthly&&term ? monthly*term : (Number(ct.amountFinanced)||0);
+  return ct.payoffAmount!=null ? Number(ct.payoffAmount) : Math.max(0,total-paid);
+}
+
+async function renderCustomers(){
+  const list=document.getElementById("list");
+  list.innerHTML = `<div style="color:#8c8998;padding:20px">Loading customers…</div>`;
+  await loadCustIndex();
+  if(curCust){ return renderCustomerDetail(); }
+  if(!custIndex.length){ list.innerHTML = `<div style="color:#8c8998;font-size:14px;padding:20px">No customers yet. Click “Add customer” to create one and issue them a portal login.</div>`; return; }
+  list.innerHTML = custIndex.map(c=>{
+    const v=c.vehicle||{}; const veh=[v.year,v.make,v.model].filter(Boolean).join(" ")||"—";
+    const st=(c.status||"active");
+    const sc = st==="active"?["#2fd47f","rgba(21,194,107,.14)"]:(st==="suspended"?["#ff7a6e","rgba(255,90,77,.14)"]:["#e8b13a","rgba(232,177,58,.14)"]);
+    return `<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;background:#14141c;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:15px 18px">
+      <div><div style="font-weight:700;font-size:15px">${c.name||"Customer"} <span style="font-size:11px;font-weight:700;color:${sc[0]};background:${sc[1]};padding:2px 9px;border-radius:999px;margin-left:6px;text-transform:capitalize">${st}</span></div>
+      <div style="font-size:12.5px;color:#8c8998;margin-top:3px">${veh}${c.email?(" · "+c.email):""}</div></div>
+      <div style="display:flex;gap:8px"><button data-id="${c.id}" class="cOpen" style="background:rgba(255,92,56,.16);color:#ff8366;border:none;cursor:pointer;font-size:12.5px;font-weight:700;padding:8px 14px;border-radius:9px">Open →</button></div>
+    </div>`;
+  }).join("");
+  list.querySelectorAll(".cOpen").forEach(b=>b.onclick=()=>openCustomer(b.dataset.id));
+}
+
+async function openCustomer(id){
+  const list=document.getElementById("list"); list.innerHTML=`<div style="color:#8c8998;padding:20px">Loading…</div>`;
+  curCust = await kvGet("fda:cust:"+id) || null;
+  if(!curCust){ alert("Could not load customer."); curCust=null; return renderCustomers(); }
+  renderCustomerDetail();
+}
+
+function field(label,id,val,type,ph){ return `<label style="display:block;font-size:12px;color:#8c8998;margin:10px 0 5px">${label}</label><input id="${id}" type="${type||"text"}" value="${val!=null?String(val).replace(/"/g,"&quot;"):""}" placeholder="${ph||""}" style="width:100%;background:#0f0f16;border:1px solid rgba(255,255,255,.12);border-radius:9px;padding:10px 12px;color:#e9e7ef;font-size:14px">`; }
+
+function renderCustomerDetail(){
+  const c=curCust, v=c.vehicle||{}, ct=c.contract||{}, f=c.financial||{};
+  const list=document.getElementById("list");
+  const stateOpts = (window.StateReq?window.StateReq.states():[]).map(s=>`<option value="${s.code}" ${ (ct.state||c.state)===s.code?"selected":"" }>${s.name}</option>`).join("");
+  const pays = Array.isArray(c.payments)?c.payments.slice().reverse():[];
+  const reqs = Array.isArray(c.requests)?c.requests:[];
+  const card = (title,inner)=>`<div style="background:#14141c;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px 18px;margin-bottom:14px"><div style="font-weight:700;font-size:14px;margin-bottom:4px">${title}</div>${inner}</div>`;
+  const grid = (h)=>`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px 14px">${h}</div>`;
+
+  list.innerHTML =
+    `<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+       <button id="cBack" style="background:transparent;border:1px solid rgba(255,255,255,.14);color:#b6b2c2;cursor:pointer;font-size:12.5px;font-weight:700;padding:8px 14px;border-radius:9px">← All customers</button>
+       <div style="display:flex;gap:8px"><button id="cDel" style="background:rgba(255,90,77,.12);color:#ff7a6e;border:none;cursor:pointer;font-size:12.5px;font-weight:700;padding:8px 14px;border-radius:9px">Delete</button><button id="cSave" style="background:#ff5c38;color:#0a0a0f;border:none;cursor:pointer;font-size:13px;font-weight:700;padding:9px 18px;border-radius:9px">Save</button></div>
+     </div>` +
+
+    card("👤 Customer & portal access", grid(
+      field("Full name","cd_name",c.name)+field("Email (portal login)","cd_email",c.email,"email")+field("Phone","cd_phone",c.phone)+
+      field("Status (active / suspended / pending)","cd_status",c.status||"active")
+    ) + `<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px;padding:12px;background:#0f0f16;border-radius:10px">
+        <div style="font-size:13px"><span style="color:#8c8998">Access code:</span> <b style="font-family:monospace;font-size:16px;letter-spacing:1px">${c.accessCode||"— not set —"}</b></div>
+        <button id="cCode" style="background:rgba(123,162,255,.14);color:#7aa2ff;border:none;cursor:pointer;font-size:12px;font-weight:700;padding:7px 12px;border-radius:8px">${c.accessCode?"Reset code":"Issue code"}</button>
+        <button id="cCopy" style="background:rgba(21,194,107,.14);color:#2fd47f;border:none;cursor:pointer;font-size:12px;font-weight:700;padding:7px 12px;border-radius:8px">📋 Copy portal invite</button>
+       </div>`) +
+
+    card("🚗 Vehicle", grid(
+      field("Year","cd_v_year",v.year,"number")+field("Make","cd_v_make",v.make)+field("Model","cd_v_model",v.model)+field("Trim","cd_v_trim",v.trim)+
+      field("VIN","cd_v_vin",v.vin)+field("Color","cd_v_color",v.color)+field("Mileage","cd_v_mileage",v.mileage,"number")+field("Stock #","cd_v_stock",v.stock)
+    )) +
+
+    card("💵 Financing contract", grid(
+      field("Sale price","cd_c_price",ct.salePrice,"number")+field("Down payment","cd_c_down",ct.downPayment,"number")+field("Amount financed","cd_c_fin",ct.amountFinanced,"number")+
+      field("APR %","cd_c_apr",ct.apr,"number")+field("Term (months)","cd_c_term",ct.termMonths,"number")+field("Monthly payment","cd_c_monthly",ct.monthlyPayment,"number")+
+      field("First payment date","cd_c_first",ct.firstDueDate,"date")+field("Payoff amount (optional)","cd_c_payoff",ct.payoffAmount,"number")
+    ) + `<label style="display:block;font-size:12px;color:#8c8998;margin:10px 0 5px">State (for disclosures)</label><select id="cd_c_state" style="width:100%;background:#0f0f16;border:1px solid rgba(255,255,255,.12);border-radius:9px;padding:10px 12px;color:#e9e7ef;font-size:14px">${stateOpts}</select>
+       <div style="margin-top:10px;font-size:13px;color:#8c8998">Estimated balance: <b style="color:#ff8366">${moneyD(balanceOf(c))}</b></div>`) +
+
+    card(`💳 Payments (${pays.length})`, `<button id="cPay" style="background:rgba(21,194,107,.14);color:#2fd47f;border:none;cursor:pointer;font-size:12.5px;font-weight:700;padding:8px 14px;border-radius:9px;margin-bottom:10px">＋ Record payment</button>` +
+      (pays.length? pays.map((p,idx)=>`<div style="display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.07)"><div><b>${moneyD(p.amount)}</b> <span style="color:#8c8998;font-size:12px">${(p.method||"Payment")}</span></div><div style="text-align:right;font-size:12px;color:#8c8998">${p.date?new Date(p.date).toLocaleDateString():""} <button data-pi="${pays.length-1-idx}" class="cPayDel" style="background:none;border:none;color:#ff7a6e;cursor:pointer;font-weight:700">✕</button></div></div>`).join("") : `<div style="color:#8c8998;font-size:13px">No payments recorded.</div>`)) +
+
+    card("🧑‍💼 Financial profile (from customer)", grid(
+      field("Annual income","cd_f_income",f.income,"number")+field("Employer","cd_f_employer",f.employer)+field("Years employed","cd_f_years",f.employmentYears,"number")
+    ) + (f.notes?`<div style="margin-top:8px;font-size:13px;color:#b6b2c2">Notes: ${String(f.notes).replace(/</g,"&lt;")}</div>`:"")) +
+
+    card(`📨 Requests (${reqs.length})`, reqs.length? reqs.map((r,idx)=>`<div style="display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.07)"><div><b style="text-transform:capitalize">${r.type||"message"}</b>${r.amount?(" · "+moneyD(r.amount)):""}<div style="font-size:12px;color:#8c8998">${(r.message||"").replace(/</g,"&lt;")}</div></div><div style="text-align:right"><span style="font-size:11px;color:${r.status==="closed"?"#2fd47f":"#e8b13a"}">${r.status||"open"}</span><br>${r.status!=="closed"?`<button data-ri="${idx}" class="cReqClose" style="background:none;border:none;color:#7aa2ff;cursor:pointer;font-size:12px;font-weight:700">Mark done</button>`:""}</div></div>`).join("") : `<div style="color:#8c8998;font-size:13px">No requests from this customer.</div>`);
+
+  // wiring
+  document.getElementById("cBack").onclick=()=>{ curCust=null; renderCustomers(); };
+  document.getElementById("cSave").onclick=saveCurCust;
+  document.getElementById("cDel").onclick=deleteCurCust;
+  document.getElementById("cCode").onclick=()=>{ curCust.accessCode=genCode(); renderCustomerDetail(); };
+  document.getElementById("cCopy").onclick=()=>{
+    const code=document.getElementById("cd_name")&&curCust.accessCode;
+    const msg = `Manage your vehicle, payments & financing in our app:\n${portalURL()}\n\nEmail: ${curCust.email||"(your email)"}\nAccess code: ${curCust.accessCode||"(issue a code first)"}\n\nTip: open the link on your phone and tap “Add to Home Screen” to install it as an app.`;
+    navigator.clipboard.writeText(msg).then(()=>alert("Portal invite copied — paste it to your customer (text/email)."),()=>prompt("Copy this:",msg));
+  };
+  document.getElementById("cPay").onclick=()=>{
+    const amt=parseFloat(prompt("Payment amount (USD)?",String(curCust.contract&&curCust.contract.monthlyPayment||"")))||0;
+    if(!amt) return; const method=prompt("Method? (Cash, Card, Zelle, Cash App, Bank)","Cash")||"Payment";
+    curCust.payments=Array.isArray(curCust.payments)?curCust.payments:[];
+    curCust.payments.push({date:new Date().toISOString().slice(0,10),amount:amt,method:method});
+    renderCustomerDetail();
+  };
+  list.querySelectorAll(".cPayDel").forEach(b=>b.onclick=()=>{ curCust.payments.splice(+b.dataset.pi,1); renderCustomerDetail(); });
+  list.querySelectorAll(".cReqClose").forEach(b=>b.onclick=()=>{ curCust.requests[+b.dataset.ri].status="closed"; renderCustomerDetail(); });
+}
+
+function collectCust(){
+  const g=id=>{const el=document.getElementById(id);return el?el.value:undefined;};
+  const num=id=>{const v=g(id);return v===""||v==null?null:Number(v);};
+  curCust.name=g("cd_name"); curCust.email=g("cd_email"); curCust.phone=g("cd_phone"); curCust.status=(g("cd_status")||"active").trim().toLowerCase();
+  curCust.dealerName=dealerName();
+  curCust.vehicle={year:num("cd_v_year"),make:g("cd_v_make"),model:g("cd_v_model"),trim:g("cd_v_trim"),vin:g("cd_v_vin"),color:g("cd_v_color"),mileage:num("cd_v_mileage"),stock:g("cd_v_stock")};
+  curCust.contract={salePrice:num("cd_c_price"),downPayment:num("cd_c_down"),amountFinanced:num("cd_c_fin"),apr:num("cd_c_apr"),termMonths:num("cd_c_term"),monthlyPayment:num("cd_c_monthly"),firstDueDate:g("cd_c_first"),payoffAmount:num("cd_c_payoff"),state:g("cd_c_state"),status:curCust.status};
+  curCust.state=g("cd_c_state");
+  const f=curCust.financial||{};
+  curCust.financial={income:num("cd_f_income"),employer:g("cd_f_employer"),employmentYears:num("cd_f_years"),notes:f.notes};
+}
+
+async function saveCurCust(){
+  collectCust();
+  if(!curCust.email){ alert("An email is required (it's the customer's portal login)."); return; }
+  if(!curCust.id) curCust.id=newId();
+  const btn=document.getElementById("cSave"); btn.disabled=true; btn.textContent="Saving…";
+  try{
+    await kvSet("fda:cust:"+curCust.id, curCust);
+    await kvSet("fda:custmap:"+normEmail(curCust.email), {id:curCust.id});   // email -> id (portal login lookup); object form so /api/data doesn't mangle it
+    await loadCustIndex();
+    const summary={id:curCust.id,name:curCust.name,email:curCust.email,status:curCust.status,vehicle:{year:curCust.vehicle.year,make:curCust.vehicle.make,model:curCust.vehicle.model}};
+    const ix=custIndex.findIndex(x=>x.id===curCust.id);
+    if(ix>=0) custIndex[ix]=summary; else custIndex.push(summary);
+    await kvSet(CUST_INDEX_KEY, custIndex);
+    document.getElementById("cloudDot").textContent="Cloud: saved ✓"; document.getElementById("cloudDot").style.color="#2fd47f";
+    alert("Saved. Customer can sign in at "+portalURL()+" with their email + access code.");
+  }catch(e){ alert("Save failed: "+e.message); }
+  btn.disabled=false; btn.textContent="Save";
+}
+
+async function deleteCurCust(){
+  if(!curCust.id){ curCust=null; return renderCustomers(); }
+  if(!confirm("Delete this customer and their portal access?")) return;
+  try{
+    await fetch("/api/data?key="+encodeURIComponent("fda:cust:"+curCust.id),{method:"POST",headers:authHeaders({"content-type":"application/json"}),body:"{}"});
+    if(curCust.email) await fetch("/api/data?key="+encodeURIComponent("fda:custmap:"+normEmail(curCust.email)),{method:"POST",headers:authHeaders({"content-type":"application/json"}),body:"{}"});
+    await loadCustIndex(); custIndex=custIndex.filter(x=>x.id!==curCust.id); await kvSet(CUST_INDEX_KEY,custIndex);
+  }catch(e){}
+  curCust=null; renderCustomers();
+}
+
+function newCustomer(){
+  curCust={ id:newId(), name:"", email:"", status:"active", accessCode:genCode(), dealerName:dealerName(), vehicle:{}, contract:{state:"CA"}, payments:[], financial:{}, requests:[] };
+  renderCustomerDetail();
+}
+
+/* ===================== STATE REQUIREMENTS — review & edit ===================== */
+const STATEREQ_KEY = "fda:statereq:overrides";
+let stateOverrides = null;
+async function renderStateReq(){
+  const list=document.getElementById("list");
+  if(!window.StateReq){ list.innerHTML=`<div style="color:#8c8998;padding:20px">Requirements engine not loaded.</div>`; return; }
+  if(stateOverrides===null){ try{ stateOverrides = (await kvGet(STATEREQ_KEY))||{}; }catch(e){ stateOverrides={}; } }
+  const opts=window.StateReq.states().map(s=>`<option value="${s.code}">${s.name}</option>`).join("");
+  list.innerHTML=`
+    <div style="background:#14141c;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px 18px;margin-bottom:14px">
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <select id="srState" style="flex:1;min-width:180px;background:#0f0f16;border:1px solid rgba(255,255,255,.12);border-radius:9px;padding:10px 12px;color:#e9e7ef;font-size:14px">${opts}</select>
+        <button id="srEdit" style="background:rgba(123,162,255,.14);color:#7aa2ff;border:none;cursor:pointer;font-size:13px;font-weight:700;padding:9px 16px;border-radius:9px">✎ Edit / verify</button>
+      </div>
+      <p style="font-size:12.5px;color:#8c8998;margin:10px 0 0">⚠️ This is a commonly-cited baseline, <b>not legal advice</b>. Have your attorney verify each state before relying on it. Edits are saved to your account and used in the customer portal.</p>
+    </div>
+    <div id="srView"></div>`;
+  const sel=document.getElementById("srState");
+  const show=()=>{ document.getElementById("srView").innerHTML=window.StateReq.render(sel.value,"autoSales",{overrides:stateOverrides}); window.StateReq.injectCSS(); };
+  sel.onchange=show; show();
+  document.getElementById("srEdit").onclick=()=>editState(sel.value);
+}
+function editState(code){
+  const base=window.StateReq.get(code,"autoSales",stateOverrides).state;
+  const fields=[["dealerLicense","Dealer licensing"],["salesTax","Sales / titling tax"],["docFee","Documentary / processing fee"],["coolingOff","Right to cancel"],["retailInstallment","Retail-installment / finance law"],["usury","Interest-rate (usury) limits"],["gap","GAP / debt-cancellation"],["refinance","Refinancing"]];
+  const list=document.getElementById("list");
+  list.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><button id="srBack" style="background:transparent;border:1px solid rgba(255,255,255,.14);color:#b6b2c2;cursor:pointer;font-size:12.5px;font-weight:700;padding:8px 14px;border-radius:9px">← Back</button><button id="srSave" style="background:#ff5c38;color:#0a0a0f;border:none;cursor:pointer;font-size:13px;font-weight:700;padding:9px 18px;border-radius:9px">Save ${code}</button></div>
+    <div style="background:#14141c;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px 18px"><div style="font-weight:700;margin-bottom:6px">${base.name} — edit requirements</div>`+
+    `<label style="display:block;font-size:12px;color:#8c8998;margin:10px 0 5px">State regulator</label><input id="sr_regulator" value="${(base.regulator||"").replace(/"/g,"&quot;")}" style="width:100%;background:#0f0f16;border:1px solid rgba(255,255,255,.12);border-radius:9px;padding:10px 12px;color:#e9e7ef;font-size:14px">`+
+    fields.map(f=>`<label style="display:block;font-size:12px;color:#8c8998;margin:10px 0 5px">${f[1]}</label><textarea id="sr_${f[0]}" rows="2" style="width:100%;background:#0f0f16;border:1px solid rgba(255,255,255,.12);border-radius:9px;padding:10px 12px;color:#e9e7ef;font-size:14px">${(base[f[0]]||"").replace(/</g,"&lt;")}</textarea>`).join("")+
+    `<label style="display:flex;gap:8px;align-items:center;margin-top:12px;font-size:13px;color:#b6b2c2"><input type="checkbox" id="sr_verified" ${base.verified?"checked":""} style="width:auto"> I (or my counsel) have verified this state is accurate</label></div>`;
+  document.getElementById("srBack").onclick=renderStateReq;
+  document.getElementById("srSave").onclick=async()=>{
+    const o={regulator:document.getElementById("sr_regulator").value};
+    fields.forEach(f=>{ o[f[0]]=document.getElementById("sr_"+f[0]).value; });
+    o.verified=document.getElementById("sr_verified").checked;
+    stateOverrides=stateOverrides||{}; stateOverrides[code]=Object.assign({},stateOverrides[code],o);
+    try{ await kvSet(STATEREQ_KEY,stateOverrides); alert(code+" saved."); renderStateReq(); }catch(e){ alert("Save failed: "+e.message); }
+  };
+}
+
+/* ===================== SETTINGS — env secrets manager ===================== */
+function adminToken(){ return sessionStorage.getItem("fda_admin") || ""; }
+function setAdminToken(t){ if(t) sessionStorage.setItem("fda_admin", t); else sessionStorage.removeItem("fda_admin"); }
+
+async function renderSettings(){
+  const list = document.getElementById("list");
+  if(!adminToken()){
+    list.innerHTML = `
+      <div style="max-width:480px;background:#14141c;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:24px">
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;margin-bottom:6px">🔒 Unlock secrets manager</div>
+        <div style="font-size:13.5px;color:#8c8998;line-height:1.55;margin-bottom:16px">Enter your admin password (the <b>ADMIN_PASSWORD</b> env var). It's kept only in this browser tab and sent over HTTPS to manage your AI keys.</div>
+        <input id="adminPw" type="password" placeholder="Admin password" style="width:100%;background:#0a0a0f;border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:12px 14px;color:#e9e7ef;font-size:15px;margin-bottom:12px">
+        <button id="unlockBtn" style="width:100%;background:#ff5c38;color:#0a0a0f;border:none;cursor:pointer;font-weight:700;font-size:15px;padding:12px;border-radius:10px">Unlock</button>
+        <div id="setMsg" style="display:none;font-size:13px;margin-top:12px"></div>
+      </div>`;
+    document.getElementById("unlockBtn").onclick = async ()=>{
+      const pw = document.getElementById("adminPw").value.trim();
+      if(!pw) return;
+      setAdminToken(pw);
+      const ok = await loadSecrets();
+      if(!ok) setAdminToken(""); // clear on failure so the unlock form returns
+    };
+    document.getElementById("adminPw").addEventListener("keydown", e=>{ if(e.key==="Enter") document.getElementById("unlockBtn").click(); });
+    return;
+  }
+  await loadSecrets();
+}
+
+function setMsg(text, ok){
+  const m = document.getElementById("setMsg");
+  if(!m) return;
+  m.style.display="block"; m.textContent=text;
+  m.style.color = ok ? "#2fd47f" : "#ff7a6e";
+}
+
+async function loadSecrets(){
+  const list = document.getElementById("list");
+  let data;
+  try{
+    const r = await fetch("/api/secrets", { headers: { "x-admin-token": adminToken() } });
+    data = await r.json();
+    if(r.status===403 && data.locked){ list.innerHTML = `<div style="color:#ff7a6e;font-size:14px;padding:20px;max-width:560px;line-height:1.6">⚠️ ${data.reason}<br><span style="color:#8c8998">Add <b>ADMIN_PASSWORD</b> in Vercel → Settings → Environment Variables, redeploy, then unlock here.</span></div>`; return false; }
+    if(r.status===401){ setMsg("Wrong admin password.", false); return false; }
+    if(!r.ok){ list.innerHTML = `<div style="color:#ff7a6e;font-size:14px;padding:20px">${data.error||"Error loading secrets"}</div>`; return false; }
+  }catch(e){ list.innerHTML = `<div style="color:#ff7a6e;font-size:14px;padding:20px">Network error.</div>`; return false; }
+
+  const rows = (data.items||[]).map(it=>{
+    const dot = it.source==="env" ? "#7aa2ff" : it.source==="db" ? "#2fd47f" : "#5c5c66";
+    const tag = it.source==="env" ? "from environment" : it.source==="db" ? "stored • "+it.masked : "not set";
+    const actions = it.source==="env"
+      ? `<span style="font-size:12px;color:#7aa2ff">env-locked</span>`
+      : `<button data-name="${it.name}" class="setKey" style="background:rgba(255,92,56,.16);color:#ff8366;border:none;cursor:pointer;font-size:12.5px;font-weight:700;padding:7px 13px;border-radius:8px">${it.source==="db"?"Update":"Add"}</button>`
+        + (it.source==="db" ? ` <button data-name="${it.name}" class="delKey" style="background:rgba(255,90,77,.14);color:#ff7a6e;border:none;cursor:pointer;font-size:12.5px;font-weight:700;padding:7px 13px;border-radius:8px">Delete</button>` : "");
+    return `<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;background:#14141c;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:15px 18px">
+        <div><div style="font-weight:700;font-size:14.5px">${it.label} <span style="color:#8c8998;font-weight:500">· ${it.name}</span></div>
+        <div style="font-size:12.5px;color:#8c8998;margin-top:3px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${dot};margin-right:6px"></span>${tag}</div></div>
+        <div style="display:flex;gap:8px;white-space:nowrap">${actions}</div>
+      </div>`;
+  }).join("");
+
+  list.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+      <div style="font-size:13px;color:#8c8998">🔵 environment · 🟢 stored in cloud · ⚫ not set</div>
+      <button id="lockBtn" style="background:transparent;color:#8c8998;border:1px solid rgba(255,255,255,.14);cursor:pointer;font-size:12.5px;font-weight:600;padding:6px 12px;border-radius:8px">Lock</button>
+    </div>
+    ${rows}
+    <div id="setMsg" style="display:none;font-size:13px;margin-top:4px"></div>
+    <div style="font-size:12px;color:#5c5c66;margin-top:8px;line-height:1.55">Keys set in the Vercel environment always win and can't be edited here. Stored keys are saved to your Upstash database and used by <b>/api/generate</b> as fallbacks. Values are never shown in full.</div>`;
+
+  document.getElementById("lockBtn").onclick = ()=>{ setAdminToken(""); renderSettings(); };
+  list.querySelectorAll(".setKey").forEach(b=>b.onclick=()=>saveKey(b.dataset.name));
+  list.querySelectorAll(".delKey").forEach(b=>b.onclick=()=>deleteKey(b.dataset.name));
+  return true;
+}
+
+async function saveKey(name){
+  const value = prompt("Paste the value for "+name+":\n(stored encrypted-at-rest in your cloud DB; never shown again)");
+  if(!value) return;
+  try{
+    const r = await fetch("/api/secrets",{method:"POST",headers:{"content-type":"application/json","x-admin-token":adminToken()},body:JSON.stringify({name, value})});
+    const j = await r.json();
+    if(!r.ok){ alert(j.error||"Save failed"); return; }
+    await loadSecrets();
+  }catch(e){ alert("Network error"); }
+}
+
+async function deleteKey(name){
+  if(!confirm("Delete the stored "+name+"? The engine will stop using it.")) return;
+  try{
+    const r = await fetch("/api/secrets",{method:"POST",headers:{"content-type":"application/json","x-admin-token":adminToken()},body:JSON.stringify({name, delete:true})});
+    const j = await r.json();
+    if(!r.ok){ alert(j.error||"Delete failed"); return; }
+    await loadSecrets();
+  }catch(e){ alert("Network error"); }
+}
+
+/* ===================== LOGIN GATE ===================== */
+function enterApp(){
+  document.getElementById("loginGate").style.display = "none";
+  document.querySelector(".dgrid").style.display = "grid";
+  load();
+}
+async function doLogin(){
+  const pw = document.getElementById("loginPw").value;
+  const msg = document.getElementById("loginMsg");
+  const btn = document.getElementById("loginBtn");
+  btn.disabled = true; btn.textContent = "Checking…";
+  try{
+    const r = await fetch("/api/login",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({password:pw})});
+    const j = await r.json();
+    if(r.ok && j.ok){
+      sessionStorage.setItem("fda_auth","1");
+      if(pw && !j.noPassword){
+        sessionStorage.setItem("fda_admin", pw); // also unlocks Settings
+        document.cookie = "fda_auth="+encodeURIComponent(pw)+";path=/;max-age=86400;samesite=strict"; // unlocks gated pages
+      }
+      enterApp();
+      return;
+    }
+    msg.style.display="block"; msg.textContent = j.error || "Wrong password.";
+  }catch(e){
+    msg.style.display="block"; msg.textContent = "Network error — try again.";
+  }finally{
+    btn.disabled = false; btn.textContent = "Log in";
+  }
+}
+document.getElementById("loginBtn").onclick = doLogin;
+document.getElementById("loginPw").addEventListener("keydown", e=>{ if(e.key==="Enter") doLogin(); });
+document.getElementById("logoutBtn").onclick = ()=>{ sessionStorage.removeItem("fda_auth"); sessionStorage.removeItem("fda_admin"); document.cookie="fda_auth=;path=/;max-age=0"; location.reload(); };
+
+// Already logged in this session? Skip the gate.
+if(sessionStorage.getItem("fda_auth")==="1"){ enterApp(); }
+else { document.getElementById("loginPw").focus(); }
+</script>
+<script src="/data/state-requirements.js"></script>
+<script src="/i18n.js"></script>
+</body>
+</html>

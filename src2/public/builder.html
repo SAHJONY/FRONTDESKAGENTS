@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Website Studio — frontdeskagents.com</title>
+<meta name="theme-color" content="#0d0d12">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="frontdesk">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="frontdeskagents.com">
+<meta property="og:title" content="Website Studio — frontdeskagents.com">
+<meta property="og:description" content="Generate a complete, bilingual local-business website in seconds. Add photos, video and social links.">
+<meta property="og:image" content="/icon-512.png">
+<meta name="twitter:card" content="summary">
+<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){})})}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;background:#0d0d12;color:#f0eef2}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  input,textarea,select{font-family:inherit}
+  a{color:inherit}
+  .gsec{scroll-margin-top:80px}
+  html{scroll-behavior:smooth}
+  /* Builder layout responsiveness */
+  @media(max-width:880px){
+    .bgrid{grid-template-columns:1fr!important}
+    .bgrid > div:last-child{display:none!important} /* hide decorative panel on mobile */
+    .bform{padding:28px 20px!important;max-width:100%!important}
+    #builder header > div{flex-wrap:wrap;gap:12px}
+    #builder header nav{display:none}
+  }
+  /* Generated-site preview responsiveness (mirrors the downloaded file) */
+  @media(max-width:760px){
+    #siteRoot h1{font-size:38px!important}
+    #siteRoot h2{font-size:28px!important}
+    #siteRoot section, #siteRoot section > div{padding-left:18px!important;padding-right:18px!important}
+    #siteRoot [style*="grid-template-columns:repeat(3"]{grid-template-columns:1fr 1fr!important}
+    #siteRoot [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
+    #siteRoot nav{flex-wrap:wrap;gap:12px!important}
+  }
+</style>
+</head>
+<body data-i18n-auto>
+
+<!-- ============ BUILDER ============ -->
+<div id="builder">
+  <header style="border-bottom:1px solid rgba(255,255,255,.08)">
+    <div style="max-width:1140px;margin:0 auto;padding:18px 28px;display:flex;align-items:center;justify-content:space-between">
+      <div style="display:flex;align-items:center;gap:11px">
+        <div style="width:32px;height:32px;border-radius:8px;background:#ff5c38;display:flex;align-items:center;justify-content:center;font-size:18px">⚡</div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px">frontdeskagents<span style="color:#ff5c38">.com</span> · Studio</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:20px">
+        <a href="/" style="color:#b3b0bd;text-decoration:none;font-size:14px;font-weight:600">Home</a>
+        <a href="/pricing.html" style="color:#b3b0bd;text-decoration:none;font-size:14px;font-weight:600">Pricing</a>
+        <a href="/dashboard.html" style="color:#b3b0bd;text-decoration:none;font-size:14px;font-weight:600">Dashboard</a>
+        <a href="/contact.html" style="color:#b3b0bd;text-decoration:none;font-size:14px;font-weight:600">Contact</a>
+        <select data-lang-select aria-label="Language" style="background:rgba(255,255,255,.08);color:#f0eef2;border:1px solid rgba(255,255,255,.16);font-size:13px;font-weight:700;padding:8px 11px;border-radius:999px;cursor:pointer"></select>
+      </div>
+    </div>
+  </header>
+
+  <div class="bgrid" style="display:grid;grid-template-columns:1.05fr .95fr;min-height:calc(100vh - 61px)">
+    <!-- FORM -->
+    <div class="bform" style="padding:48px 52px;max-width:640px;margin-left:auto;width:100%">
+      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,92,56,.12);color:#ff8366;font-size:13px;font-weight:700;padding:7px 14px;border-radius:999px;margin-bottom:20px">✦ SAHJONY™ · any country · any language</div>
+      <h1 style="font-family:'Space Grotesk',sans-serif;font-size:40px;line-height:1.05;font-weight:700;letter-spacing:-.02em;margin-bottom:12px">Build a complete website.</h1>
+      <p style="font-size:16px;color:#aaa7b5;line-height:1.6;margin-bottom:26px">Fill the basics — every section is written and assembled into a full, ready-to-launch site.</p>
+
+      <div style="display:flex;gap:8px;background:#16161e;border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:5px;margin-bottom:18px">
+        <button id="mAuto" style="flex:1;border:none;cursor:pointer;font-size:14px;font-weight:700;padding:11px;border-radius:9px;background:#ff5c38;color:#0d0d12">🤖 Auto</button>
+        <button id="mFresh" style="flex:1;border:none;cursor:pointer;font-size:14px;font-weight:700;padding:11px;border-radius:9px;background:transparent;color:#aaa7b5">✨ Start fresh</button>
+        <button id="mUrl" style="flex:1;border:none;cursor:pointer;font-size:14px;font-weight:700;padding:11px;border-radius:9px;background:transparent;color:#aaa7b5">🔄 Redesign</button>
+      </div>
+
+      <!-- ===== AUTONOMOUS MODE: name + address only — we research the rest ===== -->
+      <div id="autoPanel" style="display:flex;flex-direction:column;gap:15px">
+        <div style="background:#16161e;border:1px solid rgba(255,92,56,.25);border-radius:13px;padding:16px 18px">
+          <div style="font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;margin-bottom:4px">🤖 Autonomous build</div>
+          <div style="font-size:13.5px;color:#aaa7b5;line-height:1.55">Just the business <b>name</b> and <b>address</b>. We research it automatically — category, contact, hours, rating &amp; reviews — then design the whole site for you.</div>
+        </div>
+        <div><label class="lbl">Business name *</label><input id="aName" placeholder="e.g. Maria's Bakery"></div>
+        <div><label class="lbl">Address *</label><input id="aAddr" placeholder="123 Main St, Houston, TX, USA"></div>
+        <button id="autoBtn" style="margin-top:4px;background:#ff5c38;color:#0d0d12;border:none;cursor:pointer;font-size:17px;font-weight:700;padding:16px;border-radius:999px">🤖 Research &amp; build automatically</button>
+        <div id="autoErr" style="color:#ff8366;font-size:14px;text-align:center;display:none"></div>
+        <div style="font-size:13px;color:#8c8998;text-align:center">Powered by SAHJONY™. Sign in to your Dashboard first so the research is authorized.</div>
+      </div>
+
+      <div id="urlWrap" style="display:none;margin-bottom:14px">
+        <label style="display:block;font-size:13px;font-weight:700;color:#ff8366;margin-bottom:7px">Paste the current website URL</label>
+        <input id="fUrl" placeholder="oldwebsite.com" style="width:100%;padding:14px 16px;border-radius:11px;border:1px solid rgba(255,92,56,.3);background:#16161e;color:#f0eef2;font-size:16px">
+      </div>
+
+      <div id="manualForm" style="display:flex;flex-direction:column;gap:15px">
+        <div style="background:#16161e;border:1px solid rgba(255,92,56,.25);border-radius:13px;padding:15px 16px">
+          <label class="lbl" style="color:#ff8366">📋 Paste any business info (optional — fastest way)</label>
+          <textarea id="fPaste" rows="4" placeholder="Paste anything: an About blurb, services & prices, hours, menu, reviews, or the text from their old site. We read it and build the site from it — you can leave the fields below blank."></textarea>
+          <div style="font-size:12px;color:#8c8998;margin-top:7px">Tip: paste it all and hit build. Fill the fields below only to override or add details.</div>
+        </div>
+        <div><label class="lbl">Business name *</label><input id="fName" placeholder="e.g. Maria's Bakery"></div>
+        <div><label class="lbl">What kind of business? *</label><input id="fType" placeholder="bakery, salon, auto shop, law firm…"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:13px">
+          <div><label class="lbl">City &amp; country</label><input id="fCity" placeholder="Houston, TX, USA"></div>
+          <div><label class="lbl">Language</label><input id="fLang" placeholder="English" value="English"></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:13px">
+          <div><label class="lbl">Phone</label><input id="fPhone" placeholder="+1 (713) 555-0100"></div>
+          <div><label class="lbl">Email</label><input id="fEmail" placeholder="hello@business.com"></div>
+        </div>
+        <div><label class="lbl">Street address (for the map)</label><input id="fAddr" placeholder="123 Main St"></div>
+        <div><label class="lbl">Anything special? (optional)</label><textarea id="fNotes" rows="2" placeholder="Family-owned since 1990, vegan options, open 7 days…"></textarea></div>
+
+        <!-- ===== MEDIA & SOCIAL ===== -->
+        <div style="background:#16161e;border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:16px;display:flex;flex-direction:column;gap:16px">
+          <div style="font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700">🎬 Media &amp; social <span style="color:#8c8998;font-weight:500;font-size:13px">(optional — adds the client's real content)</span></div>
+
+          <!-- Photos -->
+          <div>
+            <label class="lbl">📷 Photos (gallery &amp; hero)</label>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+              <label style="cursor:pointer;background:rgba(255,92,56,.16);color:#ff8366;font-size:13px;font-weight:700;padding:9px 14px;border-radius:9px">⬆ Upload photos<input id="fPhotoFile" type="file" accept="image/*" multiple style="display:none"></label>
+              <input id="fPhotoUrl" placeholder="…or paste an image URL" style="flex:1;min-width:160px;padding:9px 12px;font-size:14px">
+              <button type="button" id="addPhotoUrl" style="background:rgba(255,255,255,.08);color:#f0eef2;border:1px solid rgba(255,255,255,.16);cursor:pointer;font-size:13px;font-weight:700;padding:9px 14px;border-radius:9px">Add</button>
+            </div>
+            <div id="photoThumbs" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+            <label style="display:flex;align-items:center;gap:9px;margin-top:10px;font-size:13.5px;color:#d6d3df;cursor:pointer"><input id="fAIimg" type="checkbox" style="width:auto;accent-color:#ff5c38"> ✨ Generate a stunning hero image (when no photos are added)</label>
+          </div>
+
+          <!-- Video -->
+          <div>
+            <label class="lbl">🎥 Video</label>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <input id="fVideo" placeholder="YouTube / Vimeo / .mp4 URL" style="flex:1;min-width:160px;padding:9px 12px;font-size:14px">
+              <label style="cursor:pointer;background:rgba(255,92,56,.16);color:#ff8366;font-size:13px;font-weight:700;padding:9px 14px;border-radius:9px">⬆ Upload<input id="fVideoFile" type="file" accept="video/*" style="display:none"></label>
+              <button type="button" id="genVideo" style="background:rgba(255,255,255,.08);color:#f0eef2;border:1px solid rgba(255,255,255,.16);cursor:pointer;font-size:13px;font-weight:700;padding:9px 14px;border-radius:9px">🎬 Generate cinematic video</button>
+            </div>
+            <label style="display:flex;align-items:center;gap:9px;margin-top:10px;font-size:13.5px;color:#d6d3df;cursor:pointer"><input id="fAIvid" type="checkbox" style="width:auto;accent-color:#ff5c38"> ✨ Auto-generate a cinematic Higgsfield video when none is added</label>
+            <div id="videoNote" style="font-size:12px;color:#8c8998;margin-top:6px"></div>
+          </div>
+
+          <!-- Audio -->
+          <div>
+            <label class="lbl">🎵 Audio</label>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <input id="fAudio" placeholder="Audio file URL (.mp3 / .m4a)" style="flex:1;min-width:160px;padding:9px 12px;font-size:14px">
+              <label style="cursor:pointer;background:rgba(255,92,56,.16);color:#ff8366;font-size:13px;font-weight:700;padding:9px 14px;border-radius:9px">⬆ Upload<input id="fAudioFile" type="file" accept="audio/*" style="display:none"></label>
+            </div>
+            <div id="audioNote" style="font-size:12px;color:#8c8998;margin-top:6px"></div>
+          </div>
+
+          <!-- Social links -->
+          <div>
+            <label class="lbl">🔗 Social media links</label>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+              <input id="sFacebook" placeholder="Facebook URL" style="padding:9px 12px;font-size:14px">
+              <input id="sInstagram" placeholder="Instagram URL" style="padding:9px 12px;font-size:14px">
+              <input id="sTiktok" placeholder="TikTok URL" style="padding:9px 12px;font-size:14px">
+              <input id="sYoutube" placeholder="YouTube URL" style="padding:9px 12px;font-size:14px">
+              <input id="sX" placeholder="X / Twitter URL" style="padding:9px 12px;font-size:14px">
+              <input id="sWhatsapp" placeholder="WhatsApp link/number" style="padding:9px 12px;font-size:14px">
+              <input id="sLinkedin" placeholder="LinkedIn URL" style="padding:9px 12px;font-size:14px">
+            </div>
+          </div>
+
+          <!-- Social posts -->
+          <div>
+            <label class="lbl">📱 Social media posts (one URL per line)</label>
+            <textarea id="fPosts" rows="2" placeholder="https://instagram.com/p/...&#10;https://facebook.com/...&#10;https://youtube.com/watch?v=..." style="font-size:14px"></textarea>
+            <div style="font-size:12px;color:#8c8998;margin-top:6px">Each becomes a “Follow us” card linking to the post (YouTube posts embed inline).</div>
+          </div>
+        </div>
+
+        <button id="buildBtn" style="margin-top:4px;background:#ff5c38;color:#0d0d12;border:none;cursor:pointer;font-size:17px;font-weight:700;padding:16px;border-radius:999px">⚡ Build my website</button>
+        <div id="err" style="color:#ff8366;font-size:14px;text-align:center;display:none"></div>
+        <div style="font-size:13px;color:#8c8998;text-align:center">Runs on your own Claude key via the secure backend.</div>
+      </div>
+    </div>
+
+    <!-- VISUAL -->
+    <div style="background:linear-gradient(160deg,#1a1622,#16161e);border-left:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;padding:48px">
+      <div id="idlePane" style="text-align:center;max-width:380px">
+        <div style="font-size:64px;margin-bottom:20px">🌎</div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:23px;font-weight:700">A full website, every section included.</div>
+        <div id="chips" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:20px"></div>
+      </div>
+      <div id="loadPane" style="display:none;text-align:center">
+        <div style="width:60px;height:60px;border:4px solid rgba(255,92,56,.2);border-top-color:#ff5c38;border-radius:50%;animation:spin .9s linear infinite;margin:0 auto 24px"></div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:21px;font-weight:700">Building your website…</div>
+        <div id="loadMsg" style="font-size:13px;color:#e8916b;font-weight:700;margin-top:6px">✦ SAHJONY™ is crafting every word</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ GENERATED SITE MOUNTS HERE ============ -->
+<!-- data-no-i18n: never translate the client's generated site (its language is chosen in the form) -->
+<div id="site" data-no-i18n style="display:none"></div>
+
+<style>
+  .lbl{display:block;font-size:13px;font-weight:700;color:#d6d3df;margin-bottom:7px}
+  #builder input,#builder textarea{width:100%;padding:14px 16px;border-radius:11px;border:1px solid rgba(255,255,255,.12);background:#16161e;color:#f0eef2;font-size:16px}
+  #builder input::placeholder,#builder textarea::placeholder{color:#9aa0aa}
+</style>
+
+<script src="/data/state-requirements.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+let mode = "auto";
+
+const CHIPS = ["Home","About","Services","Gallery","Reviews","FAQ","Hours","Map","Contact","Social links","Click-to-call","Footer"];
+$("#chips").innerHTML = CHIPS.map(c=>`<div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:#d6d3df;font-size:13px;font-weight:600;padding:7px 13px;border-radius:999px">${c}</div>`).join("");
+
+// Three modes: auto (name+address → we research), fresh (manual form), url (redesign).
+function setMode(m){
+  mode = m;
+  const map = { auto:"#mAuto", fresh:"#mFresh", url:"#mUrl" };
+  for(const k in map){ const b=$(map[k]); if(!b) continue; const on=(k===m); b.style.background=on?"#ff5c38":"transparent"; b.style.color=on?"#0d0d12":"#aaa7b5"; }
+  $("#autoPanel").style.display = (m==="auto") ? "flex" : "none";
+  $("#manualForm").style.display = (m==="auto") ? "none" : "flex";
+  $("#urlWrap").style.display = (m==="url") ? "block" : "none";
+}
+$("#mAuto").onclick = ()=>setMode("auto");
+$("#mFresh").onclick = ()=>setMode("fresh");
+$("#mUrl").onclick = ()=>setMode("url");
+setMode("auto");
+
+// prefill from ?mode=url&url=
+const qp = new URLSearchParams(location.search);
+if(qp.get("mode")==="url"){ setMode("url"); }
+if(qp.get("url")){ $("#fUrl").value = qp.get("url"); setMode("url"); }
+
+function val(id){ return ($("#"+id).value||"").trim(); }
+function deriveName(u){ try{ const h=u.replace(/^https?:\/\//,"").replace(/^www\./,"").split("/")[0].split(".")[0]; return h.charAt(0).toUpperCase()+h.slice(1); }catch(e){ return "Your Business"; } }
+function initials(n){ const w=(n||"").trim().split(/\s+/).filter(Boolean); return w.length?(w[0][0]+(w[1]?w[1][0]:"")).toUpperCase():"★"; }
+function pickIcon(n){ const t=(n||"").toLowerCase(); const m=[["clean","✨"],["cut","✂️"],["hair","💇"],["repair","🔧"],["oil","🛢️"],["brake","🛑"],["tire","🛞"],["cake","🎂"],["bread","🥖"],["coffee","☕"],["plant","🌿"],["flower","💐"],["nail","💅"],["massage","💆"],["photo","📷"],["legal","⚖️"],["tax","🧾"],["pet","🐾"]]; for(const[k,i]of m)if(t.includes(k))return i; return "●"; }
+function theme(t){ t=(t||"").toLowerCase(); if(/food|restaurant|cafe|coffee|bakery|bread|cake|pizza|taco|grill|bar|diner/.test(t))return"#c1312a"; if(/barber|auto|repair|gym|fitness|construction|plumb|electric|tattoo/.test(t))return"#1f6feb"; if(/plant|flower|spa|salon|nail|beauty|yoga|wellness/.test(t))return"#3d6b4a"; if(/law|legal|account|finance|consult|tech|agency|estate|insur/.test(t))return"#2a3b8f"; return"#5b3df2"; }
+
+/* ===================== DESIGN SYSTEM ===================== */
+const HEAD_FONTS = ["Space Grotesk","Sora","Poppins","Montserrat","Playfair Display","Fraunces","DM Serif Display","Bricolage Grotesque","Outfit","Syne","Unbounded","Manrope"];
+const BODY_FONTS = ["Inter","DM Sans","Manrope","Work Sans","Nunito Sans","Mulish","Figtree","Rubik"];
+// Languages offered by the generated site's language button (value = name used in
+// the translate prompt; label = native name shown in the dropdown).
+const CINE_LANGS = [["English","English"],["Spanish","Español"],["French","Français"],["German","Deutsch"],["Italian","Italiano"],["Portuguese","Português"],["Chinese","中文"],["Japanese","日本語"],["Korean","한국어"],["Arabic","العربية"],["Hindi","हिन्दी"],["Russian","Русский"],["Dutch","Nederlands"],["Polish","Polski"],["Turkish","Türkçe"],["Vietnamese","Tiếng Việt"]];
+function safeFont(name, list, fallback){ return list.includes(name) ? name : fallback; }
+function gfUrl(){ const fams=[...new Set([].slice.call(arguments).filter(Boolean))].map(n=>"family="+encodeURIComponent(n).replace(/%20/g,"+")+":wght@400;500;600;700;800").join("&"); return "https://fonts.googleapis.com/css2?"+fams+"&display=swap"; }
+function loadFonts(href){ if(document.querySelector('link[data-genfont="'+href+'"]')) return; const l=document.createElement("link"); l.rel="stylesheet"; l.href=href; l.setAttribute("data-genfont",href); document.head.appendChild(l); }
+
+/* ===================== MEDIA & SOCIAL ===================== */
+const media = { photos:[], videoData:"", audioData:"" };
+// Extra researched data (multi-location chains) carried into the generated site.
+const autoData = { locations:[] };
+
+function fileToDataURL(file){ return new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>res(r.result); r.onerror=rej; r.readAsDataURL(file); }); }
+
+function renderThumbs(){
+  $("#photoThumbs").innerHTML = media.photos.map((src,i)=>`
+    <div style="position:relative;width:62px;height:62px;border-radius:9px;overflow:hidden;border:1px solid rgba(255,255,255,.12)">
+      <img src="${src}" style="width:100%;height:100%;object-fit:cover">
+      <button type="button" data-i="${i}" class="rmPhoto" style="position:absolute;top:2px;right:2px;background:rgba(0,0,0,.7);color:#fff;border:none;cursor:pointer;font-size:11px;line-height:1;width:18px;height:18px;border-radius:50%">✕</button>
+    </div>`).join("");
+  $("#photoThumbs").querySelectorAll(".rmPhoto").forEach(b=>b.onclick=()=>{ media.photos.splice(+b.dataset.i,1); renderThumbs(); });
+}
+
+$("#fPhotoFile").onchange = async (e)=>{
+  for(const f of e.target.files){ try{ media.photos.push(await fileToDataURL(f)); }catch(_){} }
+  renderThumbs(); e.target.value="";
+};
+$("#addPhotoUrl").onclick = ()=>{ const u=val("fPhotoUrl"); if(u){ media.photos.push(u); $("#fPhotoUrl").value=""; renderThumbs(); } };
+$("#fVideoFile").onchange = async (e)=>{ const f=e.target.files[0]; if(!f) return; if(f.size>30*1024*1024){ $("#videoNote").textContent="⚠ That video is large (>30MB) — a URL embed is recommended."; } media.videoData=await fileToDataURL(f); $("#videoNote").textContent="✓ Video attached: "+f.name; };
+$("#fAudioFile").onchange = async (e)=>{ const f=e.target.files[0]; if(!f) return; media.audioData=await fileToDataURL(f); $("#audioNote").textContent="✓ Audio attached: "+f.name; };
+
+// Generate a cinematic background video via Higgsfield (POST /api/image mode:video).
+// Returns the video URL (and fills the #fVideo field), or "" on failure. Reused by
+// the button and the auto-on-build path. inputImage (first photo) → image-to-video.
+// Generate a cinematic video for the site. The backend picks the engine:
+// OpenMontage (full agentic production) when a render worker is configured, else
+// a Higgsfield clip. OpenMontage is async (returns a jobId) → we poll until the
+// finished video URL is ready; Higgsfield returns the URL directly. onProgress is
+// an optional status callback.
+async function generateCinematicVideo(onProgress){
+  const name=(val("fName")||val("aName")||"this business");
+  const type=(val("fType")||"local business");
+  const city=val("fCity");
+  const prompt=`Cinematic flagship brand film for a ${type} named "${name}"${city?(" in "+city):""}. Slow, smooth dolly/orbit camera, dramatic volumetric lighting, glossy reflective surfaces, shallow depth of field, Tesla/Apple commercial aesthetic, seamless loop, color-graded, 8k. No text, no watermark.`;
+  const r=await fetch("/api/image",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({mode:"video",prompt,inputImage:media.photos[0]||"",photos:media.photos.slice(0,12),business:name,type,city,aspect:"16:9",durationSec:20})});
+  const j=await r.json();
+  if(r.ok && j.url){ $("#fVideo").value=j.url; return j.url; }           // Higgsfield: direct
+  if(r.status===202 && j.jobId){                                          // OpenMontage: poll
+    const deadlineMs=Date.now()+6*60*1000;                               // up to 6 min
+    while(Date.now()<deadlineMs){
+      await new Promise(s=>setTimeout(s,5000));
+      let p; try{ p=await (await fetch("/api/image?videoJob="+encodeURIComponent(j.jobId))).json(); }catch(_){ continue; }
+      if(onProgress) onProgress(p.progress||p.state||"rendering");
+      if(p.state==="done" && p.url){ $("#fVideo").value=p.url; return p.url; }
+      if(p.state==="error") throw new Error(p.error||"OpenMontage render failed");
+    }
+    throw new Error("OpenMontage render timed out");
+  }
+  throw new Error(j.error||"video generation failed");
+}
+
+$("#genVideo").onclick = async ()=>{
+  const btn=$("#genVideo"), prev=btn.textContent;
+  btn.disabled=true; btn.textContent="🎬 Rendering… (~1 min)";
+  $("#videoNote").textContent="Generating a cinematic Higgsfield video — this can take up to a minute…";
+  try{ const u=await generateCinematicVideo(); $("#videoNote").textContent="✓ Cinematic video generated & added: "+u.slice(0,60)+"…"; }
+  catch(e){ $("#videoNote").textContent="⚠ "+(e.message||"video generation failed"); }
+  finally{ btn.disabled=false; btn.textContent=prev; }
+};
+
+// Build the media payload at build time (combines uploads + typed URLs).
+function collectMedia(){
+  return {
+    photos: media.photos.slice(),
+    video: val("fVideo") || media.videoData || "",
+    audio: val("fAudio") || media.audioData || "",
+    social: { facebook:val("sFacebook"), instagram:val("sInstagram"), tiktok:val("sTiktok"), youtube:val("sYoutube"), x:val("sX"), whatsapp:val("sWhatsapp"), linkedin:val("sLinkedin") },
+    posts: val("fPosts").split(/\n+/).map(s=>s.trim()).filter(Boolean),
+    locations: (autoData.locations||[]).slice(),
+    biz: autoData.biz || null,
+  };
+}
+
+const SOCIAL_META = { facebook:["Facebook","📘"], instagram:["Instagram","📷"], tiktok:["TikTok","🎵"], youtube:["YouTube","▶️"], x:["X","𝕏"], whatsapp:["WhatsApp","💬"], linkedin:["LinkedIn","in"] };
+function socialHref(k,v){ if(k==="whatsapp" && /^[0-9+ ()-]+$/.test(v)) return "https://wa.me/"+v.replace(/[^0-9]/g,""); return /^https?:\/\//.test(v)?v:("https://"+v); }
+function socialLinksHtml(social, color, size){
+  const items = Object.entries(social||{}).filter(([k,v])=>v && v.trim());
+  if(!items.length) return "";
+  return items.map(([k,v])=>{ const [label,icon]=SOCIAL_META[k]||[k,"🔗"]; return `<a href="${socialHref(k,v)}" target="_blank" rel="noopener" title="${label}" style="display:inline-flex;align-items:center;justify-content:center;width:${size||38}px;height:${size||38}px;border-radius:50%;background:${color||'rgba(0,0,0,.06)'};text-decoration:none;font-size:${(size||38)*0.46}px">${icon}</a>`; }).join("");
+}
+function videoEmbed(url){
+  if(!url) return "";
+  let m;
+  if((m=url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([\w-]{6,})/))){ return `<iframe src="https://www.youtube.com/embed/${m[1]}" style="width:100%;aspect-ratio:16/9;border:0;border-radius:14px" allowfullscreen loading="lazy"></iframe>`; }
+  if((m=url.match(/vimeo\.com\/(\d+)/))){ return `<iframe src="https://player.vimeo.com/video/${m[1]}" style="width:100%;aspect-ratio:16/9;border:0;border-radius:14px" allowfullscreen loading="lazy"></iframe>`; }
+  if(/^data:video|\.mp4($|\?)|\.webm($|\?)|\.mov($|\?)/i.test(url)){ return `<video src="${url}" controls playsinline style="width:100%;border-radius:14px;background:#000"></video>`; }
+  return `<iframe src="${url}" style="width:100%;aspect-ratio:16/9;border:0;border-radius:14px" allowfullscreen loading="lazy"></iframe>`;
+}
+function postCard(url, primary){
+  let m, label="View post", icon="📱";
+  if(/youtu/.test(url)){ icon="▶️"; label="Watch on YouTube"; if((m=url.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{6,})/))) return `<div style="border-radius:14px;overflow:hidden;border:1px solid rgba(0,0,0,.09)"><iframe src="https://www.youtube.com/embed/${m[1]}" style="width:100%;aspect-ratio:16/9;border:0" allowfullscreen loading="lazy"></iframe></div>`; }
+  else if(/instagram/.test(url)){ icon="📷"; label="View on Instagram"; }
+  else if(/facebook/.test(url)){ icon="📘"; label="View on Facebook"; }
+  else if(/tiktok/.test(url)){ icon="🎵"; label="View on TikTok"; }
+  else if(/(twitter|x\.com)/.test(url)){ icon="𝕏"; label="View on X"; }
+  return `<a href="${url}" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:14px;background:#fff;border:1px solid rgba(0,0,0,.09);border-radius:14px;padding:18px 20px;text-decoration:none;color:#1d2129"><div style="font-size:26px">${icon}</div><div style="flex:1;min-width:0"><div style="font-weight:700;font-size:15px">${label}</div><div style="font-size:13px;color:#5c6270;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${url}</div></div><div style="color:${primary};font-weight:700">→</div></a>`;
+}
+
+function fallback(type, name, city){
+  const biz = (name||"").trim() || "We";
+  const has = !!(name||"").trim();
+  const where = (city||"").trim();
+  const local = where ? `in ${where}` : "in our community";
+  return {
+    tagline:`${has?name:"Your local "+type}, ${local}.`.slice(0,80),
+    heroSub:`Trusted ${type} ${local} — quality work, fair prices, and service that treats you like a neighbor.`,
+    about1:`${has?name+" is":"We're"} a ${type} ${local}, built on honest work and doing the job right the first time.`,
+    about2:`From your first call to the finished job, ${has?name:"we"} bring experience, pride, and care to everything we do.`,
+    services:[{name:"Free Estimates",desc:`Tell us what you need — no-pressure quotes for ${where||"your area"}.`,price:"Free"},{name:"Standard Service",desc:`Dependable ${type} work, done on time.`,price:""},{name:"Premium Service",desc:"Our top-tier option, finished to the highest standard.",price:""},{name:"Repairs & Fixes",desc:"Fast, reliable help when something goes wrong.",price:""},{name:"Maintenance Plans",desc:"Keep things running with scheduled visits.",price:""},{name:"Emergency Service",desc:`Same-day help ${local}.`,price:""}],
+    reviews:[{quote:`Best ${type} ${local}. Friendly, fair, and they clearly know their craft.`,author:"Maria G."},{quote:`I won't go anywhere else. Honest people and great work, every time.`,author:"James T."},{quote:"Quick, professional, and reasonably priced. Highly recommend.",author:"Dana R."}],
+    faqs:[{q:"Do I need an appointment?",a:"Walk-ins are welcome, but booking ahead guarantees your spot."},{q:"What payment options do you accept?",a:"Cash and all major cards."},{q:`Do you serve ${where||"my area"}?`,a:`Yes — we proudly serve ${where?where+" and the surrounding area":"the whole local community"}.`}],
+    hours:[{day:"Mon – Fri",time:"9:00 – 18:00"},{day:"Saturday",time:"10:00 – 16:00"},{day:"Sunday",time:"Closed"}],
+    labels:{}
+  };
+}
+
+async function generate(){
+  $("#err").style.display="none";
+  const paste=val("fPaste");
+  let name=val("fName"), type=val("fType");
+  if(mode==="url" && !name) name=deriveName(val("fUrl"));
+  // If they pasted info but left fields blank, derive sensible defaults so the AI can run.
+  if(paste && !name){ name=(paste.split(/\n/).find(l=>l.trim())||"").trim().slice(0,48)||"Your Business"; }
+  if(paste && !type){ type="local business"; }
+  if(!name || !type){ $("#err").textContent="Add a business name and type — or just paste the business info above."; $("#err").style.display="block"; return; }
+
+  $("#idlePane").style.display="none"; $("#loadPane").style.display="block";
+  $("#buildBtn").textContent="Building…"; $("#buildBtn").disabled=true;
+
+  const city=val("fCity"), lang=val("fLang")||"English", notes=val("fNotes"), url=val("fUrl");
+  const prompt = `You are a world-class brand & web designer + copywriter. Design a STUNNING, premium, magazine-quality website — distinctive and memorable, NEVER generic or templated. Return ONLY valid minified JSON, no markdown.
+Business name: ${name}
+Type: ${type}
+${city?("Location: "+city):""}
+${url?("They currently have this website (reimagine it as a brand-new, far more premium site): "+url):""}
+${notes?("Notes: "+notes):""}
+${paste?("SOURCE INFORMATION provided by the owner — treat this as the PRIMARY source of truth. Extract real services, prices, hours, story, and reviews from it instead of inventing them:\n\"\"\"\n"+paste+"\n\"\"\""):""}
+Write ALL text in this language: ${lang}.
+ART DIRECTION: the site is rendered in an ULTRA-PREMIUM, CINEMATIC, TESLA-STYLE dark theme — full-bleed imagery, dramatic negative space, huge confident typography, minimal and high-end. Pick ONE vivid, saturated ACCENT color (design.primary/accent) that GLOWS against a near-black (#0a0b0e) background — avoid muddy/dark accents that disappear on black. Copy should feel like a flagship product launch: bold, aspirational, cinematic, concise. Choose a tasteful Google-Font pairing matching the brand's personality (luxury, sport, artisanal, tech, etc.). Pick fonts ONLY from these exact names.
+Heading fonts: Space Grotesk, Sora, Poppins, Montserrat, Playfair Display, Fraunces, DM Serif Display, Bricolage Grotesque, Outfit, Syne, Unbounded, Manrope.
+Body fonts: Inter, DM Sans, Manrope, Work Sans, Nunito Sans, Mulish, Figtree, Rubik.
+Copy must be specific and vivid — sensory, local, confident. No filler.
+MENU/PRODUCTS: if this is a restaurant, cafe, bakery, bar, food truck, or a retail/product business, also return a "menu" array of 6-14 REAL items with prices, grouped by category (e.g. Starters, Mains, Drinks, or product collections). Extract real item names & prices from the SOURCE INFORMATION when present; otherwise create realistic ones typical for this business. For pure service businesses (law, salon, repair, etc.) return "menu":[].
+Schema: {"tagline":"<=9 words, punchy","heroSub":"<=24 words","about1":"1 vivid sentence","about2":"1 vivid sentence","services":[{"name":"","desc":"<=10 words","price":"short or empty"}] exactly 6 fitting this business,"menu":[{"name":"","desc":"<=8 words","price":"e.g. $12","category":"short group name"}] 6-14 items WITH prices for food/retail businesses else empty array,"reviews":[{"quote":"<=18 words","author":"first name + last initial"}] 3,"faqs":[{"q":"","a":"<=18 words"}] 3,"hours":[{"day":"","time":""}] 3-4 rows,"primary":"#hex","design":{"headingFont":"one heading font from the list","bodyFont":"one body font from the list","primary":"#hex","accent":"#hex complementary","dark":"#hex near-black brand tone","mood":"2-3 words e.g. warm luxury"},"labels":{"nav":["Home","About","Services","Gallery","Reviews","Contact"],"cta":"Call Us","heroCta":"Get in Touch","heroCta2":"See Services","aboutKicker":"About Us","aboutTitle":"<=7 words","servicesKicker":"What We Offer","servicesTitle":"Our Services","menuKicker":"Menu","menuTitle":"Our Menu","galleryKicker":"Gallery","galleryTitle":"Take a Look","reviewsTitle":"What People Say","faqTitle":"FAQ","contactTitle":"Visit Us","find":"Find Us","hours":"Hours","call":"Call","email":"Email","footerBlurb":"<=16 words"}}
+Translate EVERY label and all content into ${lang}.`;
+
+  // Try the AI brain; retry once before giving up. Only fall back to the built-in
+  // copy if generation genuinely fails — and tell the user when that happens, so a
+  // generic site is never silently presented as a finished, AI-designed one.
+  let gen, genError=null;
+  for(let attempt=0; attempt<2 && !gen; attempt++){
+    try{
+      if(attempt>0){ const lm=$("#loadMsg"); if(lm) lm.textContent="Retrying the design engine…"; }
+      const r = await fetch("/api/generate",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({prompt})});
+      const j = await r.json();
+      if(!r.ok) throw new Error(j.error||("Generator returned "+r.status));
+      const match = (j.text||"").match(/\{[\s\S]*\}/);
+      if(!match) throw new Error("Design response was not valid");
+      gen = JSON.parse(match[0]);
+      genError=null;
+    }catch(e){
+      genError=e.message||"generation failed";
+      console.warn("Generate attempt "+(attempt+1)+" failed:", genError);
+    }
+  }
+  if(!gen){
+    gen = fallback(type, name, city);
+    const eb=$("#err");
+    if(eb){ eb.textContent="⚠ The design engine was momentarily unavailable, so we built a starter site from your details. Click Generate again to retry the full design. (Reason: "+genError+")"; eb.style.display="block"; }
+  }
+
+  const mediaPayload = collectMedia();
+  // Cinematic hero: when the client added no photos, paint a Tesla-grade hero with
+  // Higgsfield so EVERY site still opens on a dramatic full-bleed image.
+  if((($("#fAIimg") && $("#fAIimg").checked) || !mediaPayload.photos.length) && !mediaPayload.photos.length){
+    const lm=$("#loadMsg"); if(lm) lm.textContent="🎬 Painting a cinematic hero image…";
+    try{
+      const mood=(gen.design&&gen.design.mood)?(", "+gen.design.mood):"";
+      const ip=`Ultra-premium CINEMATIC hero photograph for a ${type} named "${name}"${city?(" in "+city):""}${mood}. Tesla-style flagship product photography: dramatic high-contrast studio + rim lighting, deep blacks, moody atmosphere, volumetric light, shallow depth of field, ultra-sharp, color-graded, editorial, 8k, photorealistic. No text, no watermarks, no logos.`;
+      const ir=await fetch("/api/image",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({prompt:ip,size:"1536x1024"})});
+      const ij=await ir.json();
+      if(ir.ok && ij.url){ mediaPayload.photos=[ij.url]; }
+      else if(ij.error){ console.warn("Image:", ij.error); }
+    }catch(_){}
+  }
+  // Cinematic video: when opted in and no video was provided, render a Higgsfield
+  // brand film (image-to-video off the hero) so the site can open on a motion hero.
+  if($("#fAIvid") && $("#fAIvid").checked && !mediaPayload.video){
+    const lm=$("#loadMsg"); if(lm) lm.textContent="🎬 Rendering a cinematic video…";
+    try{ media.photos=mediaPayload.photos.slice(); mediaPayload.video=await generateCinematicVideo(); }
+    catch(e){ console.warn("Video:", e.message||e); }
+  }
+  renderSite(name, type, city, lang, gen, mediaPayload);
+}
+
+// #rrggbb -> rgba() for cinematic overlays/glows. Falls back to the brand orange.
+function hexToRgba(hex, a){
+  hex=String(hex||"").replace('#','');
+  if(hex.length===3) hex=hex.split('').map(c=>c+c).join('');
+  const n=parseInt(hex,16);
+  if(hex.length!==6 || isNaN(n)) return 'rgba(255,92,56,'+a+')';
+  return 'rgba('+((n>>16)&255)+','+((n>>8)&255)+','+(n&255)+','+a+')';
+}
+
+// Cinematic site controller: scroll-reveal, frosted nav, light/dark toggle, and a
+// live language selector (translates on demand via /api/generate, cached). This
+// EXACT function is serialized into every published/downloaded site (via
+// .toString()) so the motion + controls ship with the generated HTML, and it is
+// also called directly for the in-app preview. No backticks/template-literals in
+// here — it must survive embedding inside a template literal.
+function cineInit(srcLang){
+  try{
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.12,rootMargin:'0px 0px -7% 0px'});
+    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+    var nav=document.querySelector('[data-cine-nav]');
+    if(nav){var on=function(){nav.classList.toggle('scrolled',(window.scrollY||document.documentElement.scrollTop)>40);};window.addEventListener('scroll',on,{passive:true});on();}
+  }catch(e){}
+
+  var root=document.querySelector('.genroot')||document.body;
+
+  // ---- Light / dark toggle (persisted) ----
+  try{
+    var tbtn=document.querySelector('[data-cine-theme]');
+    if(tbtn){
+      var saved=localStorage.getItem('cine:theme'); if(saved) root.setAttribute('data-theme',saved);
+      var paint=function(){ tbtn.textContent=(root.getAttribute('data-theme')==='light')?'☽':'☀︎'; };
+      paint();
+      tbtn.addEventListener('click',function(){ var nx=(root.getAttribute('data-theme')==='light')?'dark':'light'; root.setAttribute('data-theme',nx); localStorage.setItem('cine:theme',nx); paint(); });
+    }
+  }catch(e){}
+
+  // ---- Language selector: translate the page on demand, cache per language ----
+  try{
+    var sel=document.querySelector('[data-cine-lang]');
+    if(sel){
+      var nodes=[], orig=[];
+      (function walk(el){ for(var n=el.firstChild;n;n=n.nextSibling){ if(n.nodeType===3){ var t=n.nodeValue; if(t && t.replace(/\s/g,'').length>1 && /[A-Za-zÀ-ɏЀ-￿]/.test(t)){ nodes.push(n); orig.push(t); } } else if(n.nodeType===1){ var tg=n.tagName.toLowerCase(); if(tg==='script'||tg==='style'||tg==='svg'||tg==='iframe'||tg==='audio'||tg==='video'||n.hasAttribute('data-noi18n')) continue; walk(n); } } })(root);
+      var apply=function(a){ for(var i=0;i<nodes.length;i++){ if(a[i]!=null && nodes[i]) nodes[i].nodeValue=a[i]; } };
+      var run=function(){
+        var lang=sel.value;
+        if(lang===srcLang){ apply(orig); localStorage.setItem('cine:lang',lang); return; }
+        var key='cine:i18n:'+lang;
+        try{ var c=JSON.parse(localStorage.getItem(key)||'null'); if(c && c.length===orig.length){ apply(c); localStorage.setItem('cine:lang',lang); return; } }catch(e){}
+        sel.disabled=true; var prev=sel.style.opacity; sel.style.opacity='.5';
+        var prompt='Translate each string in this JSON array into '+lang+'. Return ONLY a JSON array of the SAME length and order, translated strings only — no notes, no markdown. Keep prices, numbers, URLs, emails and brand/proper names unchanged.\n'+JSON.stringify(orig);
+        fetch('/api/generate',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({prompt:prompt,maxTokens:4000})}).then(function(r){return r.json();}).then(function(j){ var m=(j.text||'').match(/\[[\s\S]*\]/); if(m){ var a=JSON.parse(m[0]); if(a.length===orig.length){ apply(a); try{localStorage.setItem(key,JSON.stringify(a));}catch(e){} localStorage.setItem('cine:lang',lang); } } }).catch(function(){}).then(function(){ sel.disabled=false; sel.style.opacity=prev||'1'; });
+      };
+      sel.addEventListener('change',run);
+      var last=localStorage.getItem('cine:lang'); if(last && last!==srcLang){ sel.value=last; run(); }
+    }
+  }catch(e){}
+}
+
+function renderSite(name, type, city, lang, gen, mediaIn){
+  const M = mediaIn || { photos:[], video:"", audio:"", social:{}, posts:[] };
+  // Real contact details only — never invent a fake phone/email/address. Blank
+  // fields are simply omitted from the contact section instead of rendering a
+  // placeholder like "@email.com" or a 555 number.
+  const phone=val("fPhone"), email=val("fEmail");
+  const addr=val("fAddr"), full=[addr,city].filter(Boolean).join(", ");
+  const D = gen.design||{};
+  const primary = D.primary || gen.primary || theme(type);
+  const accent = D.accent || primary;
+  // Cinematic accent — keep the brand hue but ensure it reads on a near-black bg.
+  const acc = accent;
+  const accGlow = hexToRgba(acc, .55);
+  const headingFont = safeFont(D.headingFont, HEAD_FONTS, "Space Grotesk");
+  const bodyFont = safeFont(D.bodyFont, BODY_FONTS, "Inter");
+  const fontsHref = gfUrl(headingFont, bodyFont, "Space Grotesk", "Inter");
+  loadFonts(fontsHref);
+  const L = gen.labels||{};
+  const kw = encodeURIComponent((type.split(/\s+/).slice(-1)[0])||"business");
+  const nav0 = (L.nav||["Home","About","Services","Gallery","Reviews","Contact"]).slice(0,6);
+  const hrefs=["#g-home","#g-about","#g-services","#g-gallery","#g-reviews","#g-contact"];
+  const tel="tel:"+(phone||"").replace(/[^0-9+]/g,""), mail="mailto:"+(email||"");
+  const map=full?`https://maps.google.com/maps?q=${encodeURIComponent(full)}&z=14&output=embed`:"";
+  const year=new Date().getFullYear();
+  const svc=(gen.services||[]).slice(0,6);
+  // Use the client's real photos first; fall back to themed placeholders.
+  const photos = (M.photos||[]).filter(Boolean);
+  const heroImg = photos[0] || `https://loremflickr.com/1280/720/${kw}?lock=2`;
+  const aboutImg = photos[1] || `https://loremflickr.com/800/600/${kw},shop?lock=8`;
+  const gal=[]; for(let i=0;i<6;i++){ gal.push(photos[i] || `https://loremflickr.com/600/600/${kw},business?lock=${20+i}`); }
+  const socialNav = socialLinksHtml(M.social, "rgba(0,0,0,.06)", 34);
+  const socialFooter = socialLinksHtml(M.social, "rgba(255,255,255,.1)", 40);
+
+  // ---- Local SEO: meta + JSON-LD LocalBusiness (baked into published/downloaded site) ----
+  const esc = (s)=>String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  const sameAs = Object.entries(M.social||{}).filter(([k,v])=>v&&v.trim()).map(([k,v])=>socialHref(k,v));
+  const seoDesc = String(gen.heroSub||gen.tagline||(name+" — "+type+" in "+city)).replace(/\s+/g," ").trim().slice(0,160);
+  const ld = {"@context":"https://schema.org","@type":"LocalBusiness","name":name,"description":seoDesc,"telephone":phone,"email":email,"address":{"@type":"PostalAddress","streetAddress":addr||"","addressLocality":city},"areaServed":city};
+  if(sameAs.length) ld.sameAs=sameAs;
+  if(/^https?:/.test(heroImg)) ld.image=heroImg;
+  // Bake in everything else we researched: geo, Google rating, hours, all branches.
+  const _b = M.biz || {};
+  if(_b.website) ld.url=_b.website;
+  if(_b.lat && _b.lng) ld.geo={"@type":"GeoCoordinates","latitude":_b.lat,"longitude":_b.lng};
+  if(_b.rating && _b.reviewsCount) ld.aggregateRating={"@type":"AggregateRating","ratingValue":_b.rating,"reviewCount":_b.reviewsCount};
+  if(_b.hours && _b.hours.length) ld.openingHours=_b.hours;
+  if((M.locations||[]).length>1){
+    ld.location=(M.locations||[]).map(l=>({"@type":"LocalBusiness","name":l.name||name,"address":l.address,"telephone":l.phone||undefined}));
+  }
+  const seoHead = `<meta name="description" content="${esc(seoDesc)}"><meta property="og:title" content="${esc(name)}"><meta property="og:description" content="${esc(seoDesc)}"><meta property="og:type" content="website">${/^https?:/.test(heroImg)?`<meta property="og:image" content="${heroImg}">`:""}<meta name="twitter:card" content="summary_large_image"><script type="application/ld+json">${JSON.stringify(ld).replace(/</g,"\\u003c")}<\/script>`;
+
+  // ---- Auto-sales: financing + state requirements + customer portal ----
+  // These point at our hosted apps (absolute), so they keep working even when
+  // the site is downloaded or published on the client's own domain.
+  const ORIGIN = location.origin;
+  const isAuto = /\b(auto|cars?|vehicles?|dealer|dealership|motors?|automotive|trucks?|pre-?owned|used cars?|buy here pay here|bhph)\b/i.test((type||"")+" "+(name||""));
+  const stateCode = (window.StateReq ? window.StateReq.codeFromText(full||city||addr) : "") || "";
+  const portalUrl = ORIGIN + "/portal.html";
+  const reqUrl = ORIGIN + "/requirements.html" + (stateCode ? ("?state="+stateCode) : "");
+
+  // Reusable cinematic bits.
+  const eyebrow = (t)=>`<div class="reveal cine-eyebrow">${t||""}</div>`;
+  const navExtra = (isAuto?`<a href="#g-financing" class="cnav-link">${L.financingNav||"Financing"}</a>`:"") + `<a href="${portalUrl}" class="cnav-link" target="_blank" rel="noopener">${L.accountNav||"My Account"}</a>`;
+  const navHtml = nav0.map((l,i)=>`<a href="${hrefs[i]}" class="cnav-link">${l}</a>`).join("") + navExtra;
+  const langOptions = (()=>{ const have=CINE_LANGS.some(([v])=>v===lang); const list=have?CINE_LANGS:[[lang,lang],...CINE_LANGS]; return list.map(([v,n])=>`<option value="${v}"${v===lang?" selected":""}>${n}</option>`).join(""); })();
+  const svcHtml = svc.map((s,i)=>`<div class="ccard reveal" style="padding:34px 30px"><div style="font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:${acc};letter-spacing:.1em;margin-bottom:18px">${String(i+1).padStart(2,"0")}</div><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><div style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700">${s.name||""}</div><div style="font-weight:700;color:${acc};font-size:16px;white-space:nowrap">${s.price||""}</div></div><div style="font-size:15px;color:var(--muted);margin-top:10px;line-height:1.6">${s.desc||""}</div></div>`).join("");
+  const galHtml = gal.map(u=>`<div class="gphoto reveal"><img class="cimg" src="${u}" loading="lazy" alt=""></div>`).join("");
+  const revHtml = (gen.reviews||[]).slice(0,3).map(r=>`<div class="ccard reveal" style="padding:30px"><div style="color:${acc};font-size:15px;letter-spacing:3px;margin-bottom:16px">★★★★★</div><p style="font-size:17px;line-height:1.6;margin-bottom:18px;color:var(--fg)">“${r.quote||""}”</p><div style="font-weight:700;font-size:14px;color:var(--muted)">${r.author||""}</div></div>`).join("");
+  const faqHtml = (gen.faqs||[]).slice(0,4).map(f=>`<div class="ccard reveal" style="padding:24px 28px"><div style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;margin-bottom:8px">${f.q||""}</div><div style="font-size:16px;color:var(--muted);line-height:1.65">${f.a||""}</div></div>`).join("");
+  const hrsHtml = ((gen.hours&&gen.hours.length?gen.hours:fallback(type,name,city).hours)).slice(0,4).map(h=>`<div style="display:flex;justify-content:space-between;gap:24px;font-size:16px;max-width:340px;padding:9px 0;border-bottom:1px solid var(--line)"><span style="color:var(--muted)">${h.day}</span><span style="font-weight:600">${h.time}</span></div>`).join("");
+  // Cinematic full-bleed feature panels (Tesla-style) from the top services — only
+  // when we have real photos, so they don't repeat the hero placeholder.
+  const featureHtml = (photos.length>=2 ? svc.slice(0,2) : []).map((s,i)=>`
+  <section class="gsec cine-panel"><img class="panel-img" src="${photos[(i+1)%photos.length]}" loading="lazy" alt=""><div class="cine-panel-grad"></div><div class="cine-panel-inner"><div class="reveal cine-eyebrow" style="color:rgba(255,255,255,.85)">${L.servicesKicker||"Featured"}</div><h2 class="reveal" style="font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,5vw,60px);font-weight:700;letter-spacing:-.02em;line-height:1.02;color:#fff;margin-bottom:18px">${s.name||""}</h2><p class="reveal" style="font-size:clamp(16px,1.6vw,19px);color:rgba(255,255,255,.85);max-width:560px;margin:0 auto 28px;line-height:1.6">${s.desc||""}</p><div class="reveal"><a class="cbtn cbtnA" href="#g-services">${L.heroCta2||"Explore"}</a></div></div></section>`).join("");
+
+  // ---- Financing & State Requirements section (auto-sales businesses) ----
+  const financeSection = isAuto ? `
+  <section id="g-financing" class="gsec" style="border-top:1px solid var(--line);background:var(--bg2)">
+    <style>${window.StateReq?window.StateReq.css:""}</style>
+    <div style="max-width:1180px;margin:0 auto;padding:14vh 28px">
+      <div style="text-align:center;margin-bottom:42px">${eyebrow(L.financingKicker||"Financing & Compliance")}<h2 class="reveal" style="font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,4.8vw,52px);font-weight:700;letter-spacing:-.02em">${L.financingTitle||"Financing & State Requirements"}</h2><p class="reveal" style="font-size:18px;line-height:1.7;color:var(--muted);max-width:640px;margin:16px auto 0">Transparent, compliant financing — including every federal disclosure and the rules that apply${stateCode?(" in "+(window.STATE_REQUIREMENTS.states[stateCode]||{}).name):""}. Already a customer? Manage your payments and account in our app.</p></div>
+      <div class="reveal">${(window.StateReq&&stateCode)?window.StateReq.render(stateCode,"autoSales"):'<p style="text-align:center;color:var(--muted)">Choose your state to see the full requirements.</p>'}</div>
+      <div class="reveal" style="text-align:center;margin-top:34px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+        <a class="cbtn cbtnA" href="${reqUrl}" target="_blank" rel="noopener">${L.reqCta||"View full state requirements"}</a>
+        <a class="cbtn cbtnB" href="${portalUrl}" target="_blank" rel="noopener">${L.portalCta||"My Account — manage payments"}</a>
+      </div>
+    </div>
+  </section>` : "";
+
+  // Contact form on the published site -> the owner's Business Console inbox
+  // (routed by bizSlug in /api/contact). __SITE_SLUG__ is bound on publish.
+  const inp = 'background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--fg);border-radius:10px;padding:12px 14px;font:inherit;width:100%';
+  const contactForm = `<form class="reveal" onsubmit="event.preventDefault();var f=this,b=f.querySelector('button');b.disabled=true;b.textContent='Sending…';fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({bizSlug:'__SITE_SLUG__',name:f.cn.value,contact:f.cc.value,message:f.cm.value})}).then(function(r){return r.json();}).then(function(){f.innerHTML='<p style=color:#46d39a;font-weight:700;padding:18px;text-align:center>Thanks! We received your message and will reply soon.</p>';}).catch(function(){b.disabled=false;b.textContent='Send message';alert('Could not send — please try again.');});return false;" style="display:flex;flex-direction:column;gap:12px;background:var(--bg2);border:1px solid var(--line);border-radius:18px;padding:24px">
+    <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px">${L.msgTitle||"Send us a message"}</div>
+    <input name="cn" required placeholder="${L.msgName||"Your name"}" style="${inp}">
+    <input name="cc" required placeholder="${L.msgContact||"Phone or email"}" style="${inp}">
+    <textarea name="cm" rows="3" placeholder="${L.msgBody||"How can we help?"}" style="${inp}"></textarea>
+    <button type="submit" class="cbtn cbtnA" style="border:0">${L.msgCta||"Send message"}</button>
+  </form>`;
+
+  // Optional media sections — only render when the client provided them.
+  const videoSection = M.video ? `
+  <section id="g-video" class="gsec" style="padding:14vh 28px;border-top:1px solid var(--line)"><div style="max-width:980px;margin:0 auto;text-align:center">${eyebrow("Watch")}<h2 class="reveal" style="font-family:'Space Grotesk',sans-serif;font-size:clamp(30px,4.5vw,50px);font-weight:700;letter-spacing:-.02em;margin-bottom:36px">See us in action</h2><div class="reveal" style="border-radius:16px;overflow:hidden;box-shadow:0 40px 90px -30px rgba(0,0,0,.7)">${videoEmbed(M.video)}</div></div></section>` : "";
+  const audioSection = M.audio ? `
+  <section id="g-audio" class="gsec" style="max-width:760px;margin:0 auto;padding:9vh 28px;text-align:center">${eyebrow("Listen")}<audio src="${M.audio}" controls style="width:100%"></audio></section>` : "";
+  const postsSection = (M.posts&&M.posts.length) ? `
+  <section id="g-social" class="gsec" style="max-width:1100px;margin:0 auto;padding:14vh 28px"><div style="text-align:center;margin-bottom:44px">${eyebrow("Social")}<h2 class="reveal" style="font-family:'Space Grotesk',sans-serif;font-size:clamp(30px,4.5vw,50px);font-weight:700;letter-spacing:-.02em">Follow us</h2></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">${M.posts.map(p=>postCard(p,acc)).join("")}</div>${socialNav?`<div style="display:flex;gap:12px;justify-content:center;margin-top:34px">${socialLinksHtml(M.social, hexToRgba(acc,.16), 46)}</div>`:""}</section>` : "";
+
+  // ---- Menu / products: real items WITH photos + prices, grouped by category ----
+  const menuItems = (gen.menu||[]).filter(m=>m&&m.name).slice(0,14);
+  const menuImg = (i)=> (photos.length?photos[i%photos.length]:"") || `https://loremflickr.com/600/400/${kw},food?lock=${40+i}`;
+  const menuCats = [];
+  menuItems.forEach((m,i)=>{ const c=((m.category||"").trim())||(L.menuTitle||"Menu"); let g=menuCats.find(x=>x.cat===c); if(!g){ g={cat:c,items:[]}; menuCats.push(g); } g.items.push(Object.assign({_i:i}, m)); });
+  const itemCard = (m)=>`<div class="ccard reveal" style="overflow:hidden;display:flex;flex-direction:column"><div class="gphoto" style="aspect-ratio:4/3"><img class="cimg" src="${menuImg(m._i)}" loading="lazy" alt=""></div><div style="padding:18px 22px"><div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline"><div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px">${m.name||""}</div><div style="font-weight:700;color:${acc};white-space:nowrap">${m.price||""}</div></div>${m.desc?`<div style="font-size:14px;color:var(--muted);margin-top:6px;line-height:1.5">${m.desc}</div>`:""}</div></div>`;
+  const menuSection = menuItems.length ? `
+  <section id="g-menu" class="gsec" style="max-width:1180px;margin:0 auto;padding:14vh 28px"><div style="text-align:center;margin-bottom:46px">${eyebrow(L.menuKicker||"Menu")}<h2 class="reveal" style="font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,4.8vw,52px);font-weight:700;letter-spacing:-.02em">${L.menuTitle||"Our Menu"}</h2></div>${menuCats.map(g=>`<div style="margin-bottom:46px">${menuCats.length>1?`<h3 class="reveal" style="font-family:'Space Grotesk',sans-serif;font-size:23px;font-weight:700;margin-bottom:22px;color:${acc}">${g.cat}</h3>`:""}<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px">${g.items.map(itemCard).join("")}</div></div>`).join("")}</section>` : "";
+
+  // ---- Locations: every branch when the business has more than one location ----
+  const locs = (M.locations||[]).filter(l=>l&&l.address);
+  const locationsSection = (locs.length>1) ? `
+  <section id="g-locations" class="gsec" style="border-top:1px solid var(--line);background:var(--bg2)"><div style="max-width:1180px;margin:0 auto;padding:14vh 28px"><div style="text-align:center;margin-bottom:46px">${eyebrow(L.find||"Locations")}<h2 class="reveal" style="font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,4.8vw,52px);font-weight:700;letter-spacing:-.02em">${locs.length} ${(L.find&&/location/i.test(L.find))?L.find:"Locations"}</h2></div><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px">${locs.map(l=>`<div class="ccard reveal" style="padding:26px"><div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;margin-bottom:8px">${l.name||name}</div><div style="font-size:15px;color:var(--muted);line-height:1.5;margin-bottom:10px">${l.address}</div>${l.phone?`<a href="tel:${(l.phone||"").replace(/[^0-9+]/g,"")}" style="display:block;font-size:15px;color:${acc};text-decoration:none;font-weight:600;margin-bottom:10px">${l.phone}</a>`:""}${(l.hours&&l.hours.length)?`<div style="font-size:12.5px;color:var(--muted);line-height:1.7;margin-bottom:12px">${l.hours.slice(0,7).join("<br>")}</div>`:""}${l.mapsUrl?`<a href="${l.mapsUrl}" target="_blank" rel="noopener" style="font-size:14px;font-weight:700;color:${acc};text-decoration:none">Directions →</a>`:""}</div>`).join("")}</div></div></section>` : "";
+
+  const cineCss = `
+  .genroot{--bg:#0a0b0e;--bg2:#101218;--fg:#f5f6f8;--muted:#9aa0ad;--line:rgba(255,255,255,.10);--card:rgba(255,255,255,.045);font-family:'${bodyFont}',system-ui,sans-serif;background:var(--bg);color:var(--fg);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .genroot[data-theme="light"]{--bg:#f6f7f9;--bg2:#ffffff;--fg:#0c0d10;--muted:#5b6270;--line:rgba(0,0,0,.10);--card:#ffffff}
+  .genroot h1,.genroot h2,.genroot h3{font-family:'${headingFont}',system-ui,sans-serif}
+  .genroot [style*="Space Grotesk"]{font-family:'${headingFont}',system-ui,sans-serif!important}
+  .genroot a{color:inherit}
+  .genroot ::selection{background:${acc};color:#fff}
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+  .cine-eyebrow{font-size:12px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:${acc};margin-bottom:16px}
+  .cnav{position:fixed;top:0;left:0;right:0;z-index:100;border-bottom:1px solid transparent;transition:background .4s,backdrop-filter .4s,border-color .4s}
+  .cnav-in{max-width:1280px;margin:0 auto;padding:18px 30px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+  .cnav.scrolled{background:rgba(10,11,14,.72);backdrop-filter:blur(16px) saturate(150%);border-bottom:1px solid var(--line)}
+  .genroot[data-theme="light"] .cnav.scrolled{background:rgba(255,255,255,.82)}
+  .cnav-logo{font-family:'${headingFont}',system-ui,sans-serif;font-weight:700;font-size:21px;letter-spacing:-.01em;text-decoration:none;color:#fff}
+  .cnav-links{display:flex;align-items:center;gap:26px}
+  .cnav-link{text-decoration:none;font-size:13px;font-weight:600;letter-spacing:.01em;color:#fff;opacity:.88;transition:opacity .2s}
+  .cnav-link:hover{opacity:1}
+  .cnav.scrolled .cnav-logo,.cnav.scrolled .cnav-link,.cnav.scrolled [data-cine-theme]{color:var(--fg)}
+  .cnav-tools{display:flex;align-items:center;gap:12px}
+  [data-cine-theme]{background:none;border:0;cursor:pointer;font-size:16px;line-height:1;color:#fff;padding:6px;border-radius:50%}
+  [data-cine-lang]{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.28);border-radius:999px;font-size:12px;font-weight:600;padding:7px 11px;cursor:pointer;outline:none}
+  .cnav.scrolled [data-cine-lang]{background:var(--bg2);color:var(--fg);border-color:var(--line)}
+  [data-cine-lang] option{background:#16181d;color:#fff}
+  .genroot[data-theme="light"] [data-cine-lang] option{background:#fff;color:#0c0d10}
+  .cnav-cta{text-decoration:none;font-size:13px;font-weight:700;padding:10px 20px;border-radius:999px;background:${acc};color:#fff;white-space:nowrap}
+  .cbtn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;font-size:14px;font-weight:600;letter-spacing:.02em;padding:15px 34px;border-radius:7px;cursor:pointer;transition:transform .25s,background .25s,opacity .25s}
+  .cbtn:hover{transform:translateY(-2px)}
+  .cbtnA{background:#fff;color:#0a0b0e}.cbtnA:hover{background:#e8e8ee}
+  .cbtnB{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.24);backdrop-filter:blur(6px)}
+  .ccard{background:var(--card);border:1px solid var(--line);border-radius:18px;transition:transform .45s cubic-bezier(.16,1,.3,1),border-color .45s,box-shadow .45s}
+  .ccard:hover{transform:translateY(-6px);border-color:${accGlow};box-shadow:0 30px 60px -24px rgba(0,0,0,.55)}
+  .cimg{filter:saturate(1.08) contrast(1.04)}
+  .gphoto{overflow:hidden;border-radius:14px;aspect-ratio:1/1}
+  .gphoto img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .9s cubic-bezier(.16,1,.3,1)}
+  .gphoto:hover img{transform:scale(1.07)}
+  .panel-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(1.1) contrast(1.05) brightness(.9)}
+  .cine-hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden}
+  .cine-panel{position:relative;min-height:88vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+  .cine-panel-grad{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,11,14,.45),rgba(10,11,14,.2) 45%,rgba(10,11,14,.82))}
+  .cine-panel-inner{position:relative;max-width:920px;padding:0 28px}
+  .cmap{filter:none}
+  .genroot[data-theme="dark"] .cmap{filter:invert(.92) hue-rotate(180deg) contrast(.92)}
+  @keyframes cbounce{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,9px)}}
+  .genroot img,.genroot iframe,.genroot video{max-width:100%}
+  .genroot *{min-width:0}
+  /* ---- Responsive: looks right on every device, phone → 4K ---- */
+  @media(max-width:1024px){.genroot [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important;gap:40px!important}}
+  @media(max-width:820px){.cnav-links{display:none!important}.genroot [style*="repeat(3"]{grid-template-columns:1fr 1fr!important}.cine-panel{min-height:74vh}.cine-hero{min-height:92vh}}
+  @media(max-width:600px){
+    .genroot section,.genroot section>div{padding-left:18px!important;padding-right:18px!important}
+    .gsec{padding-top:11vh!important;padding-bottom:11vh!important}
+    .cnav-in{padding:13px 16px;gap:10px}
+    .cnav-logo{font-size:17px;max-width:46vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .cnav-cta{display:none}
+    [data-cine-lang]{padding:6px 8px;font-size:11px}
+    .cbtn{padding:13px 24px;font-size:13px}
+  }
+  @media(max-width:430px){.genroot [style*="repeat(3"]{grid-template-columns:1fr!important}.cine-hero{min-height:88vh}}`;
+
+  const siteHtml = `
+  <style>${cineCss}</style>
+  <div class="genroot" data-theme="dark">
+  <nav class="cnav" data-cine-nav>
+    <div class="cnav-in">
+      <a href="#g-home" class="cnav-logo">${name}</a>
+      <div class="cnav-links">${navHtml}</div>
+      <div class="cnav-tools">
+        <button type="button" data-cine-theme aria-label="Toggle light/dark">☀︎</button>
+        <select data-cine-lang aria-label="Language" data-noi18n>${langOptions}</select>
+        ${phone?`<a class="cnav-cta" href="${tel}">${L.cta||"Call"}</a>`:""}
+      </div>
+    </div>
+  </nav>
+  <div data-biz-promos></div>
+  <section id="g-home" class="cine-hero">
+    <img class="panel-img" src="${heroImg}" alt="">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,11,14,.4) 0%,rgba(10,11,14,.1) 38%,rgba(10,11,14,.92) 100%)"></div>
+    <div style="position:absolute;inset:0;background:radial-gradient(120% 75% at 50% 8%,transparent,rgba(10,11,14,.5)),radial-gradient(60% 55% at 50% 105%,${hexToRgba(acc,.22)},transparent)"></div>
+    <div style="position:relative;max-width:1100px;margin:0 auto;width:100%;padding:0 28px 13vh;text-align:center">
+      <div class="reveal" style="font-size:12px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:20px">${city||type}</div>
+      <h1 class="reveal" data-edit="tagline" style="font-size:clamp(42px,7vw,94px);line-height:1;font-weight:700;letter-spacing:-.03em;color:#fff;margin-bottom:22px">${gen.tagline||name}</h1>
+      <p class="reveal" data-edit="heroSub" style="font-size:clamp(16px,2vw,21px);line-height:1.55;color:rgba(255,255,255,.84);max-width:620px;margin:0 auto 40px">${gen.heroSub||""}</p>
+      <div class="reveal" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap"><a class="cbtn cbtnA" href="#g-contact">${L.heroCta||"Get in Touch"}</a><a class="cbtn cbtnB" href="#g-services">${L.heroCta2||"Explore"}</a></div>
+    </div>
+    <div style="position:absolute;bottom:26px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.6);font-size:26px;animation:cbounce 2.2s infinite">⌄</div>
+  </section>
+  ${featureHtml}
+  <section id="g-about" class="gsec" style="max-width:1180px;margin:0 auto;padding:14vh 28px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center">
+    <div class="reveal" style="position:relative;aspect-ratio:4/5;border-radius:18px;overflow:hidden"><img class="cimg" src="${aboutImg}" style="width:100%;height:100%;object-fit:cover" alt=""><div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(10,11,14,.5))"></div></div>
+    <div>${eyebrow(L.aboutKicker||"About")}<h2 class="reveal" style="font-family:'Space Grotesk',sans-serif;font-size:clamp(30px,4.2vw,48px);font-weight:700;letter-spacing:-.02em;line-height:1.08;margin-bottom:22px">${L.aboutTitle||"Built on quality and trust."}</h2><p class="reveal" data-edit="about1" style="font-size:18px;line-height:1.75;color:var(--muted);margin-bottom:16px">${gen.about1||""}</p><p class="reveal" data-edit="about2" style="font-size:18px;line-height:1.75;color:var(--muted)">${gen.about2||""}</p></div>
+  </section>
+  <section id="g-services" class="gsec" style="border-top:1px solid var(--line);background:var(--bg2)"><div style="max-width:1180px;margin:0 auto;padding:14vh 28px"><div style="text-align:center;margin-bottom:52px">${eyebrow(L.servicesKicker||"What We Offer")}<h2 class="reveal" style="font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,4.8vw,52px);font-weight:700;letter-spacing:-.02em">${L.servicesTitle||"Our Services"}</h2></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px">${svcHtml}</div></div></section>
+  <section id="g-gallery" class="gsec" style="max-width:1280px;margin:0 auto;padding:14vh 28px"><div style="text-align:center;margin-bottom:46px">${eyebrow(L.galleryKicker||"Gallery")}<h2 class="reveal" style="font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,4.8vw,52px);font-weight:700;letter-spacing:-.02em">${L.galleryTitle||"Take a Look"}</h2></div><div data-biz-gallery style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">${galHtml}</div></section>
+  ${menuSection}
+  ${videoSection}
+  ${audioSection}
+  ${locationsSection}
+  <section id="g-reviews" class="gsec" style="border-top:1px solid var(--line);background:var(--bg2)"><div style="max-width:1180px;margin:0 auto;padding:14vh 28px"><div style="text-align:center;margin-bottom:46px">${eyebrow("Reviews")}<h2 class="reveal" style="font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,4.8vw,52px);font-weight:700;letter-spacing:-.02em">${L.reviewsTitle||"What People Say"}</h2></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px">${revHtml}</div></div></section>
+  <section id="g-faq" class="gsec" style="max-width:880px;margin:0 auto;padding:14vh 28px"><div style="text-align:center;margin-bottom:46px">${eyebrow("FAQ")}<h2 class="reveal" style="font-family:'Space Grotesk',sans-serif;font-size:clamp(30px,4.5vw,48px);font-weight:700;letter-spacing:-.02em">${L.faqTitle||"Questions"}</h2></div><div style="display:flex;flex-direction:column;gap:14px">${faqHtml}</div></section>
+  ${postsSection}
+  <div data-biz-media></div>
+  ${financeSection}
+  <div data-biz-pay></div>
+  <section id="g-contact" class="gsec" style="position:relative;border-top:1px solid var(--line);overflow:hidden">
+    <div style="position:absolute;inset:0;background:radial-gradient(70% 60% at 82% 18%,${hexToRgba(acc,.18)},transparent)"></div>
+    <div style="position:relative;max-width:1180px;margin:0 auto;padding:14vh 28px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center">
+    <div>${eyebrow(L.contactTitle||"Visit Us")}<h2 class="reveal" style="font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,4.8vw,52px);font-weight:700;letter-spacing:-.02em;margin-bottom:30px">${L.contactTitle||"Visit Us"}</h2><div class="reveal" style="display:flex;flex-direction:column;gap:24px;max-width:420px">${full?`<div><div style="font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:var(--muted);margin-bottom:6px">${L.find||"Find Us"}</div><div style="font-size:18px;line-height:1.5">${full}</div></div>`:""}<div><div style="font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:var(--muted);margin-bottom:8px">${L.hours||"Hours"}</div><div>${hrsHtml}</div></div><div style="display:flex;gap:34px;flex-wrap:wrap">${phone?`<div><div style="font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:var(--muted);margin-bottom:6px">${L.call||"Call"}</div><a href="${tel}" style="font-size:18px;color:${acc};text-decoration:none;font-weight:600">${phone}</a></div>`:""}${email?`<div><div style="font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:var(--muted);margin-bottom:6px">${L.email||"Email"}</div><a href="${mail}" style="font-size:18px;color:${acc};text-decoration:none;font-weight:600">${email}</a></div>`:""}</div></div></div>
+    <div class="reveal" style="display:flex;flex-direction:column;gap:22px">${contactForm}${map?`<div style="border-radius:18px;overflow:hidden;min-height:300px;border:1px solid var(--line)"><iframe class="cmap" src="${map}" width="100%" height="100%" style="border:0;min-height:300px;display:block" loading="lazy"></iframe></div>`:""}</div>
+  </div></section>
+  <footer style="border-top:1px solid var(--line);background:var(--bg2);padding:60px 28px;text-align:center"><div style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;margin-bottom:10px">${name}</div><div style="font-size:14px;color:var(--muted)">${L.footerBlurb||(city?("Proudly serving "+city):("Quality "+type+" you can count on"))}</div>${socialFooter?`<div style="display:flex;gap:10px;justify-content:center;margin-top:20px">${socialFooter}</div>`:""}<div data-biz-social></div><div style="font-size:13px;color:var(--muted);opacity:.7;margin-top:18px">© ${year} ${name}. All rights reserved.</div><div style="margin-top:8px"><a href="${ORIGIN}/business.html?slug=__SITE_SLUG__" style="font-size:12px;color:var(--muted);opacity:.55;text-decoration:none">${L.ownerLogin||"Owner login"}</a></div></footer>
+  </div>`;
+
+  document.getElementById("site").innerHTML = `
+    <div style="background:#0d0d12;color:#f0eef2;position:sticky;top:0;z-index:200"><div style="max-width:1180px;margin:0 auto;padding:10px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+      <div style="font-size:13px;color:#b3b0bd"> <b style="color:#fff">${name}</b> · ${lang}</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button id="editBtn" style="background:rgba(255,255,255,.1);color:#fff;border:none;cursor:pointer;font-size:13px;font-weight:700;padding:8px 15px;border-radius:999px">← Edit</button>
+        <button id="pubBtn" style="background:#2fd47f;color:#06241a;border:none;cursor:pointer;font-size:13px;font-weight:700;padding:8px 16px;border-radius:999px">🚀 Save & Publish</button>
+        <button id="dlBtn" style="background:#ff5c38;color:#0d0d12;border:none;cursor:pointer;font-size:13px;font-weight:700;padding:8px 16px;border-radius:999px">⬇ Download .html</button>
+      </div>
+    </div></div>
+    <div id="siteRoot" style="background:#0a0b0e;color:#f5f6f8">${siteHtml}</div>`;
+
+  document.getElementById("builder").style.display="none";
+  document.getElementById("site").style.display="block";
+  window.scrollTo(0,0);
+  // Preview: scripts injected via innerHTML don't auto-run, so wire reveal/nav/
+  // theme/language controls directly. (Published/downloaded sites get the same
+  // logic via the serialized <script> embedded in buildDoc.)
+  try{ cineInit(lang); }catch(_){ }
+  document.getElementById("editBtn").onclick=()=>{ document.getElementById("site").style.display="none"; document.getElementById("builder").style.display="block"; $("#idlePane").style.display="block";$("#loadPane").style.display="none";$("#buildBtn").textContent="⚡ Build my website";$("#buildBtn").disabled=false; };
+  document.getElementById("dlBtn").onclick=()=>downloadSite(name, siteHtml, fontsHref, seoHead, lang);
+  document.getElementById("pubBtn").onclick=()=>publishSite(name, siteHtml, fontsHref, seoHead, lang, type, city);
+}
+
+function getCookie(n){ const m=document.cookie.match(new RegExp('(?:^|; )'+n.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'=([^;]+)')); return m?decodeURIComponent(m[1]):""; }
+
+function buildDoc(name, inner, fontsHref, seoHead, lang){
+  const fonts = fontsHref || "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap";
+  // Analytics beacon: published pages (served at /s/<slug>) report a view.
+  const track = `<script>(function(){try{var m=location.pathname.match(/\\/s\\/([a-z0-9-]+)/);if(m){var u="/api/track?slug="+m[1];navigator.sendBeacon?navigator.sendBeacon(u):fetch(u);}}catch(e){}})();<\/script>`;
+  // Ship the cinematic controller (reveal, frosted nav, light/dark, language) with
+  // the standalone file — the same function the preview runs, serialized in.
+  const controller = `<script>(${cineInit.toString()})(${JSON.stringify(lang||"English")});<\/script>`;
+  return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${name}</title>${seoHead||""}<link rel="preconnect" href="https://fonts.googleapis.com"><link href="${fonts}" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}html,body{overflow-x:hidden;max-width:100%}body{font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;background:#0a0b0e;color:#f5f6f8}section{scroll-margin-top:80px}img,iframe,video{max-width:100%;height:auto}img{height:auto}</style></head><body>${inner}${track}${controller}</body></html>`;
+}
+
+async function publishSite(name, inner, fontsHref, seoHead, lang, bizType, bizCity){
+  const token = getCookie("fda_auth");
+  if(!token){ alert("Log into your Owner Dashboard first — only you can publish sites."); location.href="/dashboard.html"; return; }
+  const btn=document.getElementById("pubBtn"); const old=btn.textContent; btn.textContent="Publishing…"; btn.disabled=true;
+  try{
+    const doc = buildDoc(name, inner, fontsHref, seoHead, lang);
+    const r = await fetch("/api/sites",{method:"POST",headers:{"content-type":"application/json","x-admin-token":token},body:JSON.stringify({name, html:doc, bizType:bizType||"", bizCity:bizCity||""})});
+    const j = await r.json();
+    if(!r.ok){ alert(j.error||"Publish failed."); return; }
+    const full = location.origin + j.url;
+    if(j.console && j.bizCode){
+      const consoleUrl = location.origin + j.console;
+      try{ await navigator.clipboard.writeText("Manage your business from your site:\n"+consoleUrl+"\nBusiness ID: "+j.slug+"\nAccess code: "+j.bizCode); }catch(_){}
+      setTimeout(function(){ alert("🔑 Owner Business Console ready (copied to clipboard):\n"+consoleUrl+"\nBusiness ID: "+j.slug+"\nAccess code: "+j.bizCode+"\n\nGive this to the business owner — they run everything (content, media, promotions, payments, customers) themselves."); }, 400);
+    }
+    try{ await navigator.clipboard.writeText(full); }catch(_){}
+    btn.textContent="✓ Published";
+    alert("🎉 Live & link copied:\n"+full+"\n\nManage it anytime in Dashboard → Sites.");
+    window.open(j.url, "_blank");
+  }catch(e){ alert("Network error while publishing."); }
+  finally{ btn.disabled=false; setTimeout(()=>{btn.textContent=old;}, 1500); }
+}
+
+function downloadSite(name, inner, fontsHref, seoHead, lang){
+  const doc=buildDoc(name, inner, fontsHref, seoHead, lang);
+  const blob=new Blob([doc],{type:"text/html"}); const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob); a.download=(name.toLowerCase().replace(/[^a-z0-9]+/g,"")||"website")+".html";
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+}
+
+$("#buildBtn").onclick = generate;
+
+/* ===================== AUTONOMOUS BUILD ===================== */
+// Turn the researched Google data into a rich SOURCE blob the AI treats as the
+// primary source of truth (the generate() prompt already extracts services,
+// hours, story & reviews from pasted source info).
+function buildSourceBlob(b){
+  const L = [];
+  L.push("Business name: " + b.name);
+  if(b.type) L.push("Type / category: " + b.type);
+  if(b.address) L.push("Address: " + b.address);
+  if(b.phone) L.push("Phone: " + b.phone);
+  if(b.email) L.push("Email: " + b.email);
+  if(b.website) L.push("Their current website: " + b.website);
+  if(b.rating) L.push("Google rating: " + b.rating + "★ from " + (b.reviewsCount||0) + " reviews");
+  if(b.summary) L.push("Google summary: " + b.summary);
+  if(b.about) L.push("From their website: " + b.about);
+  if(b.hours && b.hours.length) L.push("Opening hours:\n" + b.hours.join("\n"));
+  if(b.reviews && b.reviews.length){
+    L.push("Real customer reviews (use these, lightly trimmed — do not invent others):");
+    b.reviews.forEach(r=>L.push('- "' + r.text.replace(/\s+/g," ").slice(0,240) + '" — ' + (r.author||"Customer") + (r.rating?(" ("+r.rating+"★)"):"")));
+  }
+  if(b.locations && b.locations.length>1){
+    L.push("This business has " + b.locations.length + " locations — feature ALL of them:");
+    b.locations.forEach((l,i)=>L.push((i+1)+". " + (l.name||b.name) + " — " + l.address + (l.phone?(" · "+l.phone):"")));
+  }
+  return L.join("\n");
+}
+
+async function autoBuild(){
+  const ae = $("#autoErr"); ae.style.display="none";
+  const name = val("aName"), address = val("aAddr");
+  if(!name || !address){ ae.textContent="Enter both the business name and the address."; ae.style.display="block"; return; }
+
+  $("#idlePane").style.display="none"; $("#loadPane").style.display="block";
+  const ab = $("#autoBtn"); ab.disabled=true; ab.textContent="Researching…";
+  const lm = $("#loadMsg"); if(lm) lm.textContent="🔎 Looking the business up on Google…";
+
+  const token = getCookie("fda_auth");
+  let biz=null, lookupErr=null;
+  try{
+    const r = await fetch("/api/leads-find",{ method:"POST",
+      headers: Object.assign({"content-type":"application/json"}, token?{"x-admin-token":token}:{}),
+      body: JSON.stringify({ lookup:true, name, address }) });
+    const j = await r.json();
+    if(!r.ok) throw new Error(j.error || ("Research returned "+r.status));
+    biz = j.business;
+  }catch(e){ lookupErr = e.message || "research failed"; }
+
+  // Feed everything we learned into the manual fields so generate() runs as usual.
+  if(biz){
+    $("#fName").value  = biz.name || name;
+    $("#fType").value  = biz.type || "local business";
+    $("#fCity").value  = biz.city || (address.split(",").slice(1).join(",").trim());
+    $("#fPhone").value = biz.phone || "";
+    $("#fEmail").value = biz.email || "";
+    $("#fAddr").value  = biz.address || address;
+    $("#fPaste").value = buildSourceBlob(biz);
+
+    // Keep the full researched record so renderSite can bake real geo / rating /
+    // hours / all locations into the site's SEO structured data.
+    autoData.locations = (biz.locations||[]).slice();
+    autoData.biz = biz;
+
+    // Real photos (Google + their site) → the gallery/hero. Only fall back to an
+    // AI hero image when research found no usable photos at all.
+    const pics = (biz.photos||[]).filter(Boolean);
+    media.photos = pics.slice(0, 8);
+    renderThumbs();
+    if($("#fAIimg")) $("#fAIimg").checked = (pics.length === 0);
+
+    // Video, audio and every social profile we found.
+    if(biz.video) $("#fVideo").value = biz.video;
+    if(biz.audio) $("#fAudio").value = biz.audio;
+    const S = biz.social || {};
+    const setSocial = (id,v)=>{ if(v && $(id)) $(id).value = v; };
+    setSocial("#sFacebook",  S.facebook);
+    setSocial("#sInstagram", S.instagram);
+    setSocial("#sTiktok",    S.tiktok);
+    setSocial("#sYoutube",   S.youtube);
+    setSocial("#sX",         S.x);
+    setSocial("#sWhatsapp",  S.whatsapp);
+    setSocial("#sLinkedin",  S.linkedin);
+  } else {
+    // Couldn't reach Google — still build from just the name + address given.
+    autoData.locations = []; autoData.biz = null;
+    $("#fName").value  = name;
+    $("#fType").value  = "local business";
+    $("#fAddr").value  = address;
+    $("#fCity").value  = address.split(",").slice(1).join(",").trim();
+    if($("#fAIimg")) $("#fAIimg").checked = true;
+    if(lookupErr){ ae.textContent="⚠ Couldn't fetch Google details ("+lookupErr+") — designing from the name & address you gave. Tip: sign into the Dashboard so research is authorized."; ae.style.display="block"; }
+  }
+
+  if(lm) lm.textContent="✦ SAHJONY™ is designing the site…";
+  try{ await generate(); }
+  finally{ ab.disabled=false; ab.textContent="🤖 Research & build automatically"; }
+}
+$("#autoBtn").onclick = autoBuild;
+</script>
+<script src="/i18n.js"></script>
+</body>
+</html>
